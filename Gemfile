@@ -18,6 +18,7 @@ gem 'dalli'
 gem 'foundation-rails'
 gem 'devise', "~>3.4.0"
 gem "rolify", "3.4.1"
+gem 'activeadmin', github: 'activeadmin'
 
 group :production do
 	gem 'pg'
