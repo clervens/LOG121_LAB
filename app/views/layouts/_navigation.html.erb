@@ -10,12 +10,14 @@
   <section class="top-bar-section">
     <!-- Right Nav Section -->
       <ul class="right">
-        <li class="has-dropdown">
-          <a href="#">Settings</a>
+        <li class="<%= (user_signed_in?)? 'has-dropdown' : '' %>">
+          <a href="#"><%= (user_signed_in?)? current_user.email : link_to("Log in", new_user_session_path) %></a>
+          <% if user_signed_in? %>
           <ul class="dropdown">
-            <li><a href="#">First link in dropdown</a></li>
-            <li class="active"><a href="#">Active link in dropdown</a></li>
+            <li><a href="#">Settings</a></li>
+            <li class="active"><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
           </ul>
+          <% end %>
         </li> 
       </ul>
 
