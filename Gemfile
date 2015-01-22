@@ -16,6 +16,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'dalli'
 
 gem 'foundation-rails'
+gem 'devise', "~>3.4.0"
 
 group :production do
 	gem 'pg'
@@ -31,4 +32,3 @@ group :development do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'
 end
-
