@@ -5,5 +5,10 @@
   <%= @restaurant.nom %>
 </p>
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+
+<div class="row">
+	<ul class="button-group radius">
+		<li><%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "button tiny secondary" %></li>
+		<li><%= link_to 'Back', restaurants_path, class: "button tiny secondary" %></li>
+	</ul>
+</div>

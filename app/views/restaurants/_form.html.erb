@@ -1,21 +1,26 @@
-<%= form_for(@restaurant) do |f| %>
-  <% if @restaurant.errors.any? %>
+<div class="row">
+  <div class="small-12 medium-<%= params[:action] == 'new' ? 12 : 8%> columns">
+    <%= form_for(@restaurant) do |f| %>
+    <% if @restaurant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
 
       <ul>
-      <% @restaurant.errors.full_messages.each do |message| %>
+        <% @restaurant.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :nom %><br>
-    <%= f.text_field :nom %>
+    <div class="field">
+      <%= f.label :nom %><br>
+      <%= f.text_field :nom %>
+    </div>
+    <div class="actions">
+      <%= f.submit class: "button right" %>
+    </div>
+    <div class="clearfix"></div>
+    <% end %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
