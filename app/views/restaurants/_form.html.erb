@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="small-12 medium-<%= params[:action] == 'new' ? 12 : 8%> columns">
+  <div class="small-12 columns">
     <%= form_for(@restaurant) do |f| %>
     <% if @restaurant.errors.any? %>
     <div id="error_explanation">
@@ -16,6 +16,11 @@
     <div class="field">
       <%= f.label :nom %><br>
       <%= f.text_field :nom %>
+    </div>
+
+    <div class="field">
+      <%= f.label :restaurateur, 'Restaurateur' %><br>
+      <%= f.select :restaurateur, Restaurant::RESTAURATEURS.collect {|r| [ r.capitalize, r ] }, prompt: 'Selectionner un Restaurateur' %>
     </div>
     <div class="actions">
       <%= f.submit class: "button right" %>

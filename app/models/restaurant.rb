@@ -10,4 +10,9 @@
 #
 
 class Restaurant < ActiveRecord::Base
+	RESTAURATEURS = %w(batman bob jack mike mobby)
+
+	def restaurateur
+		mock_restaurateur
+	end
 end
