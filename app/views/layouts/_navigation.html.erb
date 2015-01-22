@@ -1,7 +1,7 @@
 <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
-      <h1><a href="#">Gestion de Commande | Équipe 10</a></h1>
+      <h1><%= link_to 'Équipe 10', root_path %></h1>
     </li>
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
@@ -27,18 +27,13 @@
       <!-- Left Nav Section -->
       <ul class="left">
         <li class="has-dropdown">
-          <a href="#">Left Button Dropdown</a>
+          <a href="#">Gestionnaire</a>
           <ul class="dropdown">
-            <li><label>Scopes</label></li>
-            <li><%= link_to "Restaurants", restaurants_path %></li>
-            <li class="divider"></li>
-            <li><label>Scopes</label></li>
+            <!-- <li><label>Scopes</label></li> -->
             <li><%= link_to "Restaurants", restaurants_path %></li>
           </ul>
         </li>
       </ul>
     </section>
 </nav>
-<style>
-  nav.top-bar {margin-bottom: 10px;}
-</style>
+<style>nav.top-bar {margin-bottom: 10px;}</style>
