@@ -17,6 +17,7 @@ gem 'dalli'
 
 gem 'foundation-rails'
 gem 'devise', "~>3.4.0"
+gem "rolify", "3.4.1"
 
 group :production do
 	gem 'pg'
