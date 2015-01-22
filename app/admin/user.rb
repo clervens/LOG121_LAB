@@ -19,10 +19,19 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs "Admin Details" do
       f.input :email
-      f.input :password
-      f.input :password_confirmation
+      # f.input :password
+      # f.input :password_confirmation
+    end
+    f.inputs 'Roles' do
+      f.input :roles,  :as => :check_boxes, :collection => Role.global
     end
     f.actions
+  end
+
+  controller do
+    def permitted_params
+      params.require(:user).permit({ role_ids: [] }, :email, :password, :password_confirmation)
+    end
   end
 
 end
