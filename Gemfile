@@ -15,7 +15,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'dalli'
 
-gem 'codemirror-rails'
 gem 'foundation-rails'
 
 group :production do
