@@ -10,15 +10,18 @@
   <section class="top-bar-section">
     <!-- Right Nav Section -->
       <ul class="right">
-        <li class="<%= (user_signed_in?)? 'has-dropdown' : '' %>">
-          <a href="#"><%= (user_signed_in?)? current_user.email : link_to("Log in", new_user_session_path) %></a>
-          <% if user_signed_in? %>
+        <% if user_signed_in? %>
+        <li class="has-dropdown">
+          <%= link_to current_user.email, '#', style: 'cursor: default;text-decoration: none;' %>
           <ul class="dropdown">
             <li><a href="#">Settings</a></li>
             <li class="active"><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
           </ul>
-          <% end %>
-        </li> 
+        </li>
+        <% else %>
+        <li><%= link_to "S'inscrire", new_user_registration_path %></li>
+        <li><%= link_to "Connexion", new_user_session_path %></li>
+        <% end %>
       </ul>
 
       <!-- Left Nav Section -->
