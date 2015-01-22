@@ -1,0 +1,41 @@
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Gestion de Commande | Équipe 10</a></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="<%= (user_signed_in?)? 'has-dropdown' : '' %>">
+          <a href="#"><%= (user_signed_in?)? current_user.email : link_to("Log in", new_user_session_path) %></a>
+          <% if user_signed_in? %>
+          <ul class="dropdown">
+            <li><a href="#">Settings</a></li>
+            <li class="active"><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          </ul>
+          <% end %>
+        </li> 
+      </ul>
+
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class="has-dropdown">
+          <a href="#">Left Button Dropdown</a>
+          <ul class="dropdown">
+            <li><label>Scopes</label></li>
+            <li><%= link_to "Restaurants", restaurants_path %></li>
+            <li class="divider"></li>
+            <li><label>Scopes</label></li>
+            <li><%= link_to "Restaurants", restaurants_path %></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+</nav>
+<style>
+  nav.top-bar {margin-bottom: 10px;}
+</style>
