@@ -13,7 +13,14 @@
     <% @restaurants.each do |restaurant| %>
       <tr>
         <td data-th="<%= Restaurant.human_attribute_name "nom" %>"><%= truncate restaurant.nom.humanize, length: 20 %></td>
-        <td data-th="Restaurateur"><%= truncate restaurant.restaurateur.humanize, length: 20 %></td>
+        <td data-th="Restaurateur">
+          <%= if restaurant.restaurateur
+                truncate restaurant.restaurateur.humanize, length: 20
+              else
+                content_tag :span, "aucun", class: "label secondary tiny radius disabled", style: "color: grey;"
+              end
+          %>
+        </td>
         <td data-th="<%= Restaurant.human_attribute_name "updated_at" %>"><%= l restaurant.updated_at, format: :short %></td>
         <td data-th="<%= Restaurant.human_attribute_name "created_at" %>"><%= l restaurant.created_at, format: :short %></td>
         <td>  

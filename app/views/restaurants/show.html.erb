@@ -3,10 +3,12 @@
 	  <strong>Nom:</strong>
 	  <%= @restaurant.nom %>
 	</p>
+	<% if @restaurant.restaurateur %>
 	<p>
 	  <strong>Restaurateur:</strong>
 	  <%= @restaurant.restaurateur.capitalize %>
 	</p>
+	<% end %>
 </div>
 
 
