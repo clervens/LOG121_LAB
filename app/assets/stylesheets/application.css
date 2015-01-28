@@ -13,5 +13,8 @@
  *= require_self
  *= require foundation_and_overrides
  *= require scaffolds
+ *= require static_pages
+ *= require restaurants
+ *= require _formsteps
 
  */

@@ -12,7 +12,7 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+<body class="<%= params[:controller] %>">
   <%= render 'layouts/navigation' %>
   <%= render 'layouts/messages' %>
   <div class="row" style="margin-bottom: 50px;">
