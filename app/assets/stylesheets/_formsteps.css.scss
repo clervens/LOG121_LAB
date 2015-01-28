@@ -1,0 +1,68 @@
+/*====== formprogress ======*/
+
+#formprogress {
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+  li {
+    list-style-type: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 9px;
+    text-align: center;
+    float: left;
+    position: relative;
+    &:before {
+      content: counter(step);
+      counter-increment: step;
+      width: 20px;
+      line-height: 20px;
+      display: block;
+      font-size: 10px;
+      color: #333;
+      background: lightgrey;
+      border-radius: 3px;
+      margin: 0 auto 5px auto;
+    }
+    &:after {
+      content: '';
+      width: 100%;
+      height: 2px;
+      background: lightgrey;
+      position: absolute;
+      left: -50%;
+      top: 9px;
+      z-index: -1;
+      /*put it behind the numbers*/
+    }
+    &:first-child:after {
+      /*connector not needed before the first step*/
+      content: none;
+    }
+    &.active {
+      &:before, &:after {
+        background: #27AE60;
+        color: white;
+      }
+    }
+  }
+}
+
+/*====== formprogress connectors ======*/
+
+.form-steps-container {
+  position: relative;
+  width: 100%;
+}
+
+fieldset {
+  box-sizing: border-box;
+  width: 100%;
+  /*stacking fieldsets above each other*/
+  position: absolute;
+  &:not(:first-of-type) {
+    display: none;
+  }
+}

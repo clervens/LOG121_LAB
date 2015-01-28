@@ -1,31 +1,62 @@
 <div class="row">
   <div class="small-12 columns">
     <%= form_for(@restaurant) do |f| %>
-    <% if @restaurant.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
-
-      <ul>
-        <% @restaurant.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
+    <div class="form-steps-container">
+      <ul id="formprogress">
+        <li class="active">Information</li>
+        <li>Restaurateur</li>
       </ul>
+
+      <% if @restaurant.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+        <ul>
+          <% @restaurant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      <fieldset>
+        <%= f.label :nom %><br>
+        <%= f.text_field :nom %>
+        <%= link_to "Suivant", '#', class: "right button tiny secondary next" %>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :mock_restaurateur, 'Restaurateur' %><br>
+        <%= f.select :mock_restaurateur, Restaurant::RESTAURATEURS.collect {|r| [ r.capitalize, r ] }, prompt: 'Selectionner un Restaurateur' %>
+        <div class="actions">
+          <%= link_to "Précédant", '#', class: "left button tiny secondary previous" %>
+          <%= link_to 'Soumettre', '#', class: "button right", onclick: "confirmWithRestaurateurWarning(this)" %>
+        </div>
+      </fieldset>
     </div>
     <% end %>
-
-    <div class="field">
-      <%= f.label :nom %><br>
-      <%= f.text_field :nom %>
-    </div>
-
-    <div class="field">
-      <%= f.label :restaurateur, 'Restaurateur' %><br>
-      <%= f.select :restaurateur, Restaurant::RESTAURATEURS.collect {|r| [ r.capitalize, r ] }, prompt: 'Selectionner un Restaurateur' %>
-    </div>
-    <div class="actions">
-      <%= f.submit class: "button right" %>
-    </div>
     <div class="clearfix"></div>
-    <% end %>
   </div>
 </div>
+<div id="confirmModal" class="reveal-modal" data-reveal>
+  <h2>Pas de Restaurateur Modal</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dui felis, gravida id ornare auctor, pharetra non purus. Pellentesque fermentum lectus sit amet elementum finibus. Ut auctor dui eu nibh tristique, at dapibus sem elementum. Curabitur faucibus tellus nibh.</p>
+  <p>
+    <ul class="button-group radius right">
+    <li><a href="#" class="button small" onclick="$('form').submit()">Confirmer</a></li>
+      <li><a href="#" class="secondary button small" onclick="$('a.close-reveal-modal').trigger('click');">Annuler</a></li>
+    </ul>
+  </p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<script type="text/javascript">
+  function confirmWithRestaurateurWarning(elm) {
+    if (!$("#restaurant_mock_restaurateur").val()) {
+      $('#confirmModal').foundation('reveal', 'open');
+      return false;
+    }
+    console.log(elm);
+    $('form').submit();
+  }
+</script>
