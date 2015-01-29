@@ -28,7 +28,7 @@
         <%= f.select :mock_restaurateur, Restaurant::RESTAURATEURS.collect {|r| [ r.capitalize, r ] }, prompt: 'Selectionner un Restaurateur', label: 'Restaurateur' %>
         <div class="actions">
           <%= link_to "Précédant", '#', class: "left button tiny secondary previous" %>
-          <%= link_to 'Soumettre', '#', class: "button right", onclick: "confirmWithRestaurateurWarning(this)" %>
+          <%= f.submit class: "button right", onclick: "confirmWithRestaurateurWarning(this); return false;" %>
         </div>
       </fieldset>
     </div>
@@ -53,8 +53,9 @@
     if (!$("#restaurant_mock_restaurateur").val()) {
       $('#confirmModal').foundation('reveal', 'open');
       return false;
+    } else {
+      console.log(elm);
+      $('form').submit();
     }
-    console.log(elm);
-    $('form').submit();
   }
 </script>
