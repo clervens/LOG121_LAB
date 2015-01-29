@@ -8,7 +8,7 @@
       </ul>
 
       <% if @restaurant.errors.any? %>
-      <div id="error_explanation">
+      <div id="error_explanation" class="small-10 medium-8 large-6 small-centered columns">
         <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
 
         <ul>
@@ -20,14 +20,12 @@
       <% end %>
 
       <fieldset>
-        <%= f.label :nom %><br>
         <%= f.text_field :nom %>
         <%= link_to "Suivant", '#', class: "right button tiny secondary next" %>
       </fieldset>
 
       <fieldset>
-        <%= f.label :mock_restaurateur, 'Restaurateur' %><br>
-        <%= f.select :mock_restaurateur, Restaurant::RESTAURATEURS.collect {|r| [ r.capitalize, r ] }, prompt: 'Selectionner un Restaurateur' %>
+        <%= f.select :mock_restaurateur, Restaurant::RESTAURATEURS.collect {|r| [ r.capitalize, r ] }, prompt: 'Selectionner un Restaurateur', label: 'Restaurateur' %>
         <div class="actions">
           <%= link_to "Précédant", '#', class: "left button tiny secondary previous" %>
           <%= link_to 'Soumettre', '#', class: "button right", onclick: "confirmWithRestaurateurWarning(this)" %>

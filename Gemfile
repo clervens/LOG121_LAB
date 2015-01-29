@@ -16,6 +16,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'dalli'
 
 gem 'foundation-rails'
+gem 'foundation_rails_helper'
 gem 'devise', "~>3.4.0"
 gem "rolify", "3.4.1"
 gem 'activeadmin', github: 'activeadmin'
