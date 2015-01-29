@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
-  ActiveAdmin.routes(self)
-  root 'static_pages#home'
+	scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+	  devise_for :users
+	  ActiveAdmin.routes(self)
+	  root 'static_pages#home'
 
-  resources :restaurants
+	  resources :restaurants
+	 end
 end

@@ -20,6 +20,7 @@ gem 'foundation_rails_helper'
 gem 'devise', "~>3.4.0"
 gem "rolify", "3.4.1"
 gem 'activeadmin', github: 'activeadmin'
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 group :production do
 	gem 'pg'
