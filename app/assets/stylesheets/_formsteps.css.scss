@@ -1,3 +1,7 @@
+/*====== Include Foundation variables ======*/
+$include-html-global-classes: false;
+@import "foundation/components/global";
+
 /*====== formprogress ======*/
 
 #formprogress {
@@ -8,7 +12,7 @@
   counter-reset: step;
   li {
     list-style-type: none;
-    color: black;
+    color: $body-font-color;
     text-transform: uppercase;
     font-size: 9px;
     text-align: center;
@@ -21,8 +25,8 @@
       line-height: 20px;
       display: block;
       font-size: 10px;
-      color: #333;
-      background: lightgrey;
+      color: #fff;
+      background: $secondary-color;
       border-radius: 3px;
       margin: 0 auto 5px auto;
     }
@@ -30,7 +34,7 @@
       content: '';
       width: 100%;
       height: 2px;
-      background: lightgrey;
+      background: $secondary-color;
       position: absolute;
       left: -50%;
       top: 9px;
@@ -43,8 +47,8 @@
     }
     &.active {
       &:before, &:after {
-        background: #27AE60;
-        color: white;
+        background: $primary-color;
+        color: #fff;
       }
     }
   }

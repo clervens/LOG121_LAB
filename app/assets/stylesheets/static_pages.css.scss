@@ -2,5 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body.static_pages {
-
+	.home{
+		h1, h3 {
+			text-align: center;
+		}
+		h1.app_title {
+			margin-top: 10%;
+		}
+		p {
+			text-align: justify;
+		}
+	}
 }
