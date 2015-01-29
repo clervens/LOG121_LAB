@@ -13,6 +13,10 @@ class Restaurant < ActiveRecord::Base
 	before_validation :nilify_restaurateur
 	RESTAURATEURS = %w(batman bob jack mike mobby)
 
+	## Validations ##
+
+	validates :nom, presence: true
+
 	def restaurateur
 		mock_restaurateur
 	end
