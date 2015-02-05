@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Restaurant.human_attribute_name "nom" %></th>
+      <th><%= Restaurant.human_attribute_name "adresse" %></th>
       <th>Restaurateur</th>
       <th><%= Restaurant.human_attribute_name "updated_at" %></th>
       <th><%= Restaurant.human_attribute_name "created_at" %></th>
@@ -13,6 +14,7 @@
     <% @restaurants.each do |restaurant| %>
       <tr>
         <td data-th="<%= Restaurant.human_attribute_name "nom" %>"><%= truncate restaurant.nom.humanize, length: 20 %></td>
+        <td data-th="<%= Restaurant.human_attribute_name "adresse" %>"><%= truncate restaurant.adresse.humanize, length: 20 %></td>
         <td data-th="Restaurateur">
           <%= if restaurant.restaurateur
                 truncate restaurant.restaurateur.humanize, length: 20
