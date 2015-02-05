@@ -1,0 +1,40 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Restaurant.human_attribute_name "nom" %></th>
+      <th>Restaurateur</th>
+      <th><%= Restaurant.human_attribute_name "updated_at" %></th>
+      <th><%= Restaurant.human_attribute_name "created_at" %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @restaurants.each do |restaurant| %>
+      <tr>
+        <td data-th="<%= Restaurant.human_attribute_name "nom" %>"><%= truncate restaurant.nom.humanize, length: 20 %></td>
+        <td data-th="Restaurateur">
+          <%= if restaurant.restaurateur
+                truncate restaurant.restaurateur.humanize, length: 20
+              else
+                content_tag :span, "aucun", class: "label secondary tiny radius disabled", style: "color: grey;"
+              end
+          %>
+        </td>
+        <td data-th="<%= Restaurant.human_attribute_name "updated_at" %>"><%= l restaurant.updated_at, format: :short %></td>
+        <td data-th="<%= Restaurant.human_attribute_name "created_at" %>"><%= l restaurant.created_at, format: :short %></td>
+        <td>  
+          <ul class="button-group radius">
+            <li><%= link_to 'Show', restaurant, class: "button tiny secondary" %></li>
+            <li><%= link_to 'Edit', edit_restaurant_path(restaurant), class: "button tiny secondary" %></li>
+            <li><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
+          </ul>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<style>li a.button{margin:0;}</style>
+<%= link_to 'New restaurant', new_restaurant_path, class: "button tiny radius secondary" %>

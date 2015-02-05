@@ -19,15 +19,15 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+fr:
   hello: "Hello world"
   activerecord:
     attributes:
       restaurant:
-        nom: "Name"
+        nom: "Nom"
     errors:
       models:
         restaurant:
           attributes:
             nom:
-              blank: "can't be blank fool!"
+              blank: "ne peut être vide"

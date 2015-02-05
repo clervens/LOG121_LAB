@@ -1,0 +1,103 @@
+$include-html-global-classes: false;
+@import "foundation/components/global";
+
+@import url("//fonts.googleapis.com/css?family=Roboto");
+body {
+  font-family: roboto;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+#error_explanation {
+  border: 2px solid $alert-color;
+  padding: 7px;
+  padding-bottom: 0;
+  background-color: $alert-color;
+  color: #fff;
+  h2 {
+    text-align: left;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul {
+    margin: 5px;
+    li {
+      font-size: 0.7em;
+      list-style: none;
+    }
+  }
+}
+.table {
+  width: 100%;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid rgb(244, 244, 244);
+  .copyright {
+    font-size: .75em;
+  }
+}
+.alert-box {
+  .close {
+    text-decoration: none;
+    background-color: transparent;
+  }
+}
+// table {
+//     border: none;
+//     border-collapse: collapse;
+//     border-spacing: 0;
+//     margin: 0;
+//     width: 100%;
+//   }
+@media only screen and (max-width: 620px) {
+  table th,
+   table td {
+    padding-left: 125px !important;
+    position: relative;
+  }
+  table thead tr th {
+    display: none;
+  }
+  table td {
+    display: block !important;
+    padding-bottom: 13px !important;
+    padding-top: 13px !important;
+  }
+  table td:before {
+    background: #333333;
+    border-right: 2px solid #ffffff;
+    bottom: 0;
+    color: #ffffff;
+    content: attr(data-th);
+    display: inline-block;
+    font-family: "Roboto Condensed", Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    left: 0;
+    max-height: 100%;
+    padding-left: 13px;
+    padding-top: 13px;
+    position: absolute;
+    top: 0;
+    width: 120px;
+  }
+}
