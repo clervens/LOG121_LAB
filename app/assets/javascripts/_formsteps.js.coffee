@@ -83,8 +83,9 @@ if $("form fieldset .next, form fieldset .previous").length
       $("#formprogress>li").css "width", ->
         "#{1/$('#formprogress>li').length * 100}%"
     reset_form_height: ->
-      $("form").css 'height', ''
-      $("form").height $("form fieldset:visible").outerHeight() + $("form").height() + 60
+      form = $("form fieldset .next, form fieldset .previous").parents('form')
+      form.css 'height', ''
+      form.height form.find("fieldset:visible").outerHeight() + form.height() + 60
 
   $(".next").click formstep.next
   $(".previous").click formstep.prev

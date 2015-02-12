@@ -3,15 +3,15 @@
 		<h3><%= @menu.restaurant.nom.capitalize %></p>
 		<p><%= @menu.nom.capitalize %></p>
 	</div>
+	<% @menu.plats.each do |plat| %>
 	<div class="small-12 medium-4 large-3 left columns">
-		<% @menu.plats.each do |plat| %>
 		<ul class="pricing-table">
 			<li class="title"><%= plat.nom %></li>
 			<li class="price"><%= plat.prix %> $</li>
 			<li class="description"><%= plat.description %></li>
 		</ul>
-		<% end %>
 	</div>
+	<% end %>
 </div>
 
 <div class="row">

@@ -1,6 +1,7 @@
 class MenusController < InheritedResources::Base
 	before_action :set_restaurant, only: [:new, :index]
 	before_action :set_restaurant_and_menu, only: [:show, :edit, :update, :destroy]
+    belongs_to :restaurant
 
 	def new
 		@menu = @restaurant.menus.build
