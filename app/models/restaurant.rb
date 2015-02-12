@@ -18,6 +18,10 @@ class Restaurant < ActiveRecord::Base
 
 	validates :nom, presence: true
 
+	## Associations ##
+
+	has_many :menus
+
 	def restaurateur
 		mock_restaurateur
 	end

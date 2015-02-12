@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 	  ActiveAdmin.routes(self)
 	  root 'static_pages#home'
 
-	  resources :restaurants
+	  resources :restaurants do
+	  	resources :menus
+	  end
 	 end
 end

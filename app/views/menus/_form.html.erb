@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="small-12 columns">
+    <%= form_for([@restaurant, @menu]) do |f| %>
+      <div class="form-steps-container">
+        <ul id="formprogress">
+          <li class="active">Information</li>
+          <li>Plats</li>
+        </ul>
+        <% if @menu.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
+
+          <ul>
+            <% @menu.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+
+        <fieldset>
+          <legend>Information</legend>
+          <%= f.text_field :nom %>
+          <%= link_to "Suivant", '#', class: "right button tiny secondary next" %>
+        </fieldset>
+        <fieldset>
+          <legend>Plats</legend>
+          <%= f.hidden_field :restaurant_id %>
+          <div class="plats">
+            <%= render @menu.plats, f: f %>
+          </div>
+          <a class="button tiny info" onclick="at(); return false">Ajouter un Plat</a>
+          <%= link_to "Précédant", '#', class: "left button tiny secondary previous" %>
+          <%= f.submit class: "button right" %>
+        </fieldset>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+  var at;
+  $(function(){
+    at = function(){
+      var rslt = $("#plat_form_template").text().replace(/{{index}}/g, $('.plat').length);
+
+      $(".plats").append(rslt);
+      if (formstep) {
+        formstep.reset_form_height();
+      }
+    }
+  })
+</script>
+<script id="plat_form_template" type="text/template">
+  <div class='plat row'>
+    <div class="small-12 medium-6 columns">
+      <label>Nom</label>
+      <input class="input-text" name="menu[plats_attributes][{{index}}][nom]" type="text">
+    </div>
+    <div class="small-12 medium-6 columns">
+      <label>Prix</label>
+      <input class="input-number" name="menu[plats_attributes][{{index}}][prix]" type="number" value="0.00" min="0.00" max="1024.00" step="0.25">
+    </div>
+    <div class="small-12 columns">
+      <label>Description</label>
+      <input class="medium input-text" name="menu[plats_attributes][{{index}}][description]" type="text">
+      <a class="button tiny alert right" onclick="$(this).parents('.plat').remove()">Supprimer</a>
+    </div>
+  </div>
+</script>

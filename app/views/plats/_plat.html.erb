@@ -1,0 +1,15 @@
+<%= f.fields_for :plats, plat do |ff| %>
+  <div class='plat row'>
+    <div class="small-12 medium-6 columns">
+      <%= ff.text_field :nom %>
+    </div>
+    <div class="small-12 medium-6 columns">
+      <%= ff.number_field :prix, value: '0.00', min: '0.00', max: '1024.00', step: '0.25' %>
+    </div>
+    <div class="small-12 columns">
+      <%= ff.text_area :description %>
+      <a class="button tiny alert right" onclick="$(this).parents('.plat').hide(); $(this).next().val('true'); return false">Supprimer</a>
+      <%= ff.hidden_field :_destroy %>
+    </div>
+  </div>
+<% end %>

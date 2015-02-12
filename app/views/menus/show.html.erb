@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h3><%= @menu.restaurant.nom.capitalize %></p>
+		<p><%= @menu.nom.capitalize %></p>
+	</div>
+	<div class="small-12 medium-4 large-3 left columns">
+		<% @menu.plats.each do |plat| %>
+		<ul class="pricing-table">
+			<li class="title"><%= plat.nom %></li>
+			<li class="price"><%= plat.prix %> $</li>
+			<li class="description"><%= plat.description %></li>
+		</ul>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<ul class="button-group radius small-12 columns">
+		<li><%= link_to 'Edit', edit_restaurant_menu_path(@restaurant, @menu), class: "button tiny secondary" %></li>
+		<li><%= link_to 'Back', restaurant_menus_path(@restaurant), class: "button tiny secondary" %></li>
+	</ul>
+</div>
