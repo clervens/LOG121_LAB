@@ -1,0 +1,38 @@
+<%= form_for(@commande) do |f| %>
+  <% if @commande.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@commande.errors.count, "error") %> prohibited this commande from being saved:</h2>
+
+      <ul>
+      <% @commande.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <% Restaurant.all.each do |restaurant| %>
+      <a class="next" data-menu='<%= restaurant.menus.to_json %>'><%= restaurant.nom %></a>
+    <% end %>
+    <a href="#" class="button tiny secondary next">next</a>
+  </fieldset>
+  <fieldset>
+    
+  </fieldset>
+
+  <div class="field">
+    <%# f.label :numero %><br>
+    <%# f.text_field :numero %>
+  </div>
+  <div class="field">
+    <%# f.label :date_de_livraison %><br>
+    <%# f.datetime_select :date_de_livraison %>
+  </div>
+  <div class="field">
+    <%# f.label :restaurant_id %><br>
+    <%# f.text_field :restaurant_id %>
+  </div>
+  <div class="actions">
+    <%# f.submit %>
+  </div>
+<% end %>

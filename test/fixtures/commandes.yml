@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numero: MyString
+  date_de_livraison: 2015-02-17 12:20:27
+  restaurant_id: 
+
+two:
+  numero: MyString
+  date_de_livraison: 2015-02-17 12:20:27
+  restaurant_id: 

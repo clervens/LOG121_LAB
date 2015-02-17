@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @commande.numero %>
+</p>
+
+<p>
+  <strong>Date de livraison:</strong>
+  <%= @commande.date_de_livraison %>
+</p>
+
+<p>
+  <strong>Restaurant:</strong>
+  <%= @commande.restaurant %>
+</p>
+
+<%= link_to 'Edit', edit_commande_path(@commande) %> |
+<%= link_to 'Back', commandes_path %>
