@@ -61,6 +61,9 @@
     <fieldset>
       <legend>Confirmation</legend>
       <div class="row">
+        <div class="small-12 columns">
+          <%= f.collection_select(:adresse_id, Adresse.all, :id, :value) %>
+        </div>
         <div class="small-12 columns datetime">
           <%= f.datetime_select :date_de_livraison, {}, {} %>
         </div>

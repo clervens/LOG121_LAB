@@ -8,9 +8,11 @@
 #  restaurant_id     :integer
 #  created_at        :datetime
 #  updated_at        :datetime
+#  adresse_id        :integer
 #
 # Indexes
 #
+#  index_commandes_on_adresse_id     (adresse_id)
 #  index_commandes_on_restaurant_id  (restaurant_id)
 #
 

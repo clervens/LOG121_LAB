@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218163831) do
+ActiveRecord::Schema.define(version: 20150218215617) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -28,14 +28,25 @@ ActiveRecord::Schema.define(version: 20150218163831) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
+  create_table "adresses", force: true do |t|
+    t.string   "value"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "adresses", ["user_id"], name: "index_adresses_on_user_id"
+
   create_table "commandes", force: true do |t|
     t.string   "numero"
     t.datetime "date_de_livraison"
     t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "adresse_id"
   end
 
+  add_index "commandes", ["adresse_id"], name: "index_commandes_on_adresse_id"
   add_index "commandes", ["restaurant_id"], name: "index_commandes_on_restaurant_id"
 
   create_table "ligne_commandes", force: true do |t|
