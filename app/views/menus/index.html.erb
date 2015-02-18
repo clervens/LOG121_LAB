@@ -1,0 +1,36 @@
+<div class="small-12 columns"><h2><%= @restaurant.nom %></h2></div>
+<div class="small-12 columns">
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Menu.human_attribute_name "nom" %></th>
+        <th>Nb Plats</th>
+        <th><%= Restaurant.human_attribute_name "updated_at" %></th>
+        <th><%= Restaurant.human_attribute_name "created_at" %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @menus.each do |menu| %>
+        <tr>
+          <td data-th="<%= Menu.human_attribute_name "nom" %>"><%= menu.nom %></td>
+          <td data-th="Restaurant"><%= menu.plats.size %></td>
+          <td data-th="<%= Restaurant.human_attribute_name "updated_at" %>"><%= l menu.created_at, format: :short %></td>
+          <td data-th="<%= Restaurant.human_attribute_name "created_at" %>"><%= l menu.updated_at, format: :short %></td>
+          <td>
+            <ul class="button-group radius">
+              <li><%= link_to 'Show', [@restaurant, menu], class: "button tiny secondary" %></li>
+              <li><%= link_to 'Edit', edit_restaurant_menu_path(@restaurant, menu), class: "button tiny secondary" %></li>
+              <li><%= link_to 'X', [@restaurant, menu], method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="small-12 columns">
+  <%= link_to 'New Menu', new_restaurant_menu_path, class: "button tiny radius secondary" %>
+</div>
+<style>li a.button{margin:0;}</style>

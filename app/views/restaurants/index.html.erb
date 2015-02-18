@@ -28,8 +28,9 @@
         <td>  
           <ul class="button-group radius">
             <li><%= link_to 'Show', restaurant, class: "button tiny secondary" %></li>
+            <li><%= link_to 'Menus', restaurant_menus_path(restaurant), class: "button tiny secondary" %></li>
             <li><%= link_to 'Edit', edit_restaurant_path(restaurant), class: "button tiny secondary" %></li>
-            <li><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
+            <li><%= link_to 'X', restaurant, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
           </ul>
       </tr>
     <% end %>
