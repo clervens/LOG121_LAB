@@ -3,6 +3,8 @@ class MenusController < InheritedResources::Base
 	before_action :set_restaurant_and_menu, only: [:show, :edit, :update, :destroy]
     belongs_to :restaurant
 
+    respond_to :html, :json
+
 	def new
 		@menu = @restaurant.menus.build
 		@plat = @menu.plats.build
