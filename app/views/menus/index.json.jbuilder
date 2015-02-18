@@ -1,4 +1,4 @@
 json.array!(@menus) do |menu|
-  json.extract! menu, :id, :nom, :restaurant_id
-  json.url menu_url(menu, format: :json)
+  json.extract! menu, :id, :nom, :plats
+  json.url restaurant_menu_url @restaurant, menu, format: :json
 end

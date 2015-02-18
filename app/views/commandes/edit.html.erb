@@ -1,6 +1,8 @@
-<h1>Editing commande</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @commande %> |
-<%= link_to 'Back', commandes_path %>
+
+	<ul class="button-group radius small-12 columns">
+		<li><%= link_to 'Show', @commande, class: "button tiny secondary" %></li>
+		<li><%= link_to 'Back', commandes_path, class: "button tiny secondary" %></li>
+	</ul>

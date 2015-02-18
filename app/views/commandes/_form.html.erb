@@ -1,38 +1,157 @@
-<%= form_for(@commande) do |f| %>
-  <% if @commande.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@commande.errors.count, "error") %> prohibited this commande from being saved:</h2>
+<div class="small-12 columns">
+  <%= form_for(@commande) do |f| %>
+      <div class="form-steps-container">
+        <ul id="formprogress">
+          <li class="active">Restaurants</li>
+          <li>Menus & Plats</li>
+          <li>Sommaire</li>
+          <li>Confirmation</li>
+        </ul>
+      </div>
+    <% if @commande.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@commande.errors.count, "error") %> prohibited this commande from being saved:</h2>
 
-      <ul>
-      <% @commande.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <fieldset>
-    <% Restaurant.all.each do |restaurant| %>
-      <a class="next" data-menu='<%= restaurant.menus.to_json %>'><%= restaurant.nom %></a>
+        <ul>
+        <% @commande.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
     <% end %>
-    <a href="#" class="button tiny secondary next">next</a>
-  </fieldset>
-  <fieldset>
-    
-  </fieldset>
+    <fieldset>
+      <legend>Restaurants</legend>
+      <% Restaurant.all.each do |restaurant| %>
+        <a class="next" data-restaurant-id='<%= restaurant.id%>' onclick='select_restaurant(this);'><%= restaurant.nom %></a>
+      <% end %>
+    </fieldset>
+    <fieldset>
+      <legend>Menus & Plats</legend>
+      <div id="current_menu"></div>
+      <div class="row">
+        <div class="small-12 columns">
+          <a href="#" class="button tiny secondary previous">Prev</a>
+          <a href="#" class="button tiny secondary next right" onclick="summary()">Soumettre</a>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Sommaire</legend>
+      <div id="sommaire" class="row">
+        <table style="width: 100%">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Plat</th>
+              <th>Prix</th>
+              <th>Qté</th>
+              <th>Sous Total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="small-12 columns">
+          <a href="#" class="button tiny secondary previous">Prev</a>
+          <a href="#" class="button tiny secondary next right" onclick="summary()">Soumettre</a>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Confirmation</legend>
+      <div class="row">
+        <div class="small-12 columns datetime">
+          <%= f.datetime_select :date_de_livraison, {}, {} %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 columns">
+          <%= f.submit %>
+          <%= f.hidden_field :restaurant_id %>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
 
-  <div class="field">
-    <%# f.label :numero %><br>
-    <%# f.text_field :numero %>
+<script>
+  var menus_template, ligne_commande_template, menus;
+  $(function(){
+    menus_template = _.template($('#menu_template').html());
+    ligne_commande_template = _.template($('#ligne_commande_template').html());
+  })
+  function select_restaurant(event) {
+    $event = $(event);
+    id_restaurant = $event.data('restaurant-id');
+    $.get('/restaurants/'+id_restaurant+'/menus.json', function(data){
+      menus = data;
+      $('#current_menu').empty();
+      $('#current_menu').append(menus_template({menus: data}));
+    })
+  }
+  function summary() {
+    $('#sommaire table tbody').empty();
+    $('#commande_restaurant_id').val(menus[$('input[type=number]').data('menu-index')].id);
+    $('input[type=number]').each(function(){
+      qte = $(this).val();
+      if (!!qte){
+        menu = menus[$(this).data('menu-index')];
+        plat = menu.plats[$(this).data('index')]
+
+        $('#sommaire table tbody').append(ligne_commande_template({plat: plat, qte: qte}));
+      }
+    })
+  }
+</script>
+
+<script type="text/template" id="menu_template">
+  <div class="menu row">
+    <%% _.each(menus, function(menu, index) { %>
+      <%% _.each(menu.plats, function(plat, plat_index) { %>
+        <div class="plat small-12 medium-4 large-3 left columns">
+          <ul class="pricing-table">
+            <li class="title"><%%= plat.nom %></li>
+            <li class="price"><%%= plat.prix %> $</li>
+            <li class="description"><%%= plat.description %></li>
+            <li class="qte row">
+              <div class="small-2 columns">
+                <label class="" for="lc_qte_<%%= plat.id %>">Qte</label>
+              </div>
+              <div class="small-10 columns">
+                <input class="medium input-text" id="lc_qte_<%%= plat.id %>" min="0" type="number" data-index="<%%= plat_index %>" data-menu-index="<%%= index %>">
+              </div>
+            </li>
+          </ul>
+        </div>
+      <%% }) %>
+    <%% }) %>
   </div>
-  <div class="field">
-    <%# f.label :date_de_livraison %><br>
-    <%# f.datetime_select :date_de_livraison %>
-  </div>
-  <div class="field">
-    <%# f.label :restaurant_id %><br>
-    <%# f.text_field :restaurant_id %>
-  </div>
-  <div class="actions">
-    <%# f.submit %>
-  </div>
-<% end %>
+</script>
+<script type="text/template" id="ligne_commande_template">
+  <tr>
+    <td>
+      <%%= $('#sommaire table tbody tr').length + 1 %>
+      <input name="commande[ligne_commandes_attributes][<%%= $('#sommaire table tbody tr').length %>][qte]" type="hidden" value="<%%= qte %>">
+      <input name="commande[ligne_commandes_attributes][<%%= $('#sommaire table tbody tr').length %>][plat_id]" type="hidden" value="<%%= plat.id %>">
+    </td>
+    <td><%%= plat.nom %></td>
+    <td><%%= plat.prix %> $</td>
+    <td><%%= qte %></td>
+    <td><%%= qte * plat.prix %> $</td>
+  </tr>
+</script>
+<style>
+  .datetime select.input-text {
+    width: 16%;
+  }
+  .qte.row {
+    padding: 15px 15px 0px;
+  }
+  .qte.row label {
+    padding-top: 10px;
+  }
+  fieldset {
+    width: 97%;
+  }
+</style>

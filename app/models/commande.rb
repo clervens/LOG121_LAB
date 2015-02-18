@@ -15,5 +15,23 @@
 #
 
 class Commande < ActiveRecord::Base
+	## Associations ##
+  
   belongs_to :restaurant
+  has_many :ligne_commandes, dependent: :destroy
+  accepts_nested_attributes_for :ligne_commandes, :reject_if => :all_blank, :allow_destroy => true
+
+  ## Scopes ##
+
+  default_scope -> { includes(:ligne_commandes)}
+
+  ## Callbacks ##
+
+  before_create :generate_conf_number
+
+private
+
+	def generate_conf_number
+		self.numero = SecureRandom.hex 10
+	end
 end
