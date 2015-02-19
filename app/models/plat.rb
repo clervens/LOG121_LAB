@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  nom         :string(255)
 #  description :string(255)
-#  prix        :integer
+#  prix        :decimal(, )
 #  menu_id     :integer
 #  created_at  :datetime
 #  updated_at  :datetime
@@ -24,5 +24,5 @@ class Plat < ActiveRecord::Base
 	
 	## Associations ##
   	
-  	belongs_to :menu
+  belongs_to :menu
 end

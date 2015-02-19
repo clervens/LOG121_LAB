@@ -55,7 +55,7 @@
 			</div>
 			<div class="small-12 columns">
 				<ul class="button-group radius right">
-					<li><a href="#" class="button small" onclick="at($(this));">Confirmer</a></li>
+					<li><a href="#" class="button small" onclick="addPlat($(this));">Confirmer</a></li>
 					<li><a href="#" class="secondary button small" onclick="$('a.close-reveal-modal').trigger('click');">Annuler</a></li>
 				</ul>
 			</div>
@@ -63,22 +63,36 @@
 	</form>
 	<a class="close-reveal-modal">&#215;</a>
 </div>
+<div id="descModal" class="reveal-modal" data-reveal>
+	<h2>Attention!</h2>
+	<p>
+		Le plat que vous venez d'ajouter n'a pas de description.
+	</p>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
 <script type="text/javascript">
-	var at;
+	var addPlat;
 	$(function(){
-		at = function(modal){
+		addPlat = function(modal){
 			var container = modal.parents('.plat');
 			var $rslt = $($("#plat_form_template").text().replace(/{{index}}/g, $('.plats .plat').length));
+			var desc = container.find('[name=description]').val();
 
 			$rslt.find('.input-nom').val(container.find('[name=nom]').val());
 			$rslt.find('.input-prix').val(container.find('[name=prix]').val());
-			$rslt.find('.input-description').val(container.find('[name=description]').val());
+			$rslt.find('.input-description').val(desc);
 
 			$(".plats").append($rslt);
 			$("#confirmModal form")[0].reset();	
 			$('a.close-reveal-modal').trigger('click');
 			if (formstep) {
 				formstep.reset_form_height();
+			}
+			if (!!!desc) {
+				$('#descModal').foundation('reveal', 'open');
+				setTimeout(function(){
+					$('a.close-reveal-modal').trigger('click');
+				}, 4000);
 			}
 		}
 	})

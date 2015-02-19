@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qte: 1
+  commande_id: 
+  plat_id: 
+
+two:
+  qte: 1
+  commande_id: 
+  plat_id: 
