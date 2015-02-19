@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219145901) do
+ActiveRecord::Schema.define(version: 20150219170232) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -88,6 +88,14 @@ ActiveRecord::Schema.define(version: 20150219145901) do
     t.string   "adresse",           default: "?"
   end
 
+  create_table "restaurateurs", force: true do |t|
+    t.string   "nom"
+    t.string   "prenom"
+    t.date     "date_naissance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -115,6 +123,9 @@ ActiveRecord::Schema.define(version: 20150219145901) do
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nom"
+    t.string   "prenom"
+    t.string   "telephone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
