@@ -7,6 +7,7 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  mock_restaurateur :string(255)
+#  adresse           :string(255)      default("?")
 #
 
 class Restaurant < ActiveRecord::Base
@@ -16,6 +17,10 @@ class Restaurant < ActiveRecord::Base
 	## Validations ##
 
 	validates :nom, presence: true
+
+	## Associations ##
+
+	has_many :menus
 
 	def restaurateur
 		mock_restaurateur

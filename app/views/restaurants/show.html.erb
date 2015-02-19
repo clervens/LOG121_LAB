@@ -1,13 +1,21 @@
 <div class="row">
-	<p>
-	  <strong>Nom:</strong>
-	  <%= @restaurant.nom %>
-	</p>
+	<div class="small-12 medium-8 columns">
+		<p>
+			<strong>Nom:</strong>
+			<%= @restaurant.nom %>
+		</p>
+		<p>
+			<strong>Adresse:</strong>
+			<%= @restaurant.adresse %>
+		</p>
+	</div>
 	<% if @restaurant.restaurateur %>
-	<p>
-	  <strong>Restaurateur:</strong>
-	  <%= @restaurant.restaurateur.capitalize %>
-	</p>
+	<div class="small-12 medium-4 columns">
+		<p>
+			<strong>Restaurateur:</strong>
+			<%= @restaurant.restaurateur.capitalize %>
+		</p>
+	</div>
 	<% end %>
 </div>
 

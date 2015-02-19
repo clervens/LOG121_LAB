@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Restaurant.human_attribute_name "nom" %></th>
+      <th><%= Restaurant.human_attribute_name "adresse" %></th>
       <th>Restaurateur</th>
       <th><%= Restaurant.human_attribute_name "updated_at" %></th>
       <th><%= Restaurant.human_attribute_name "created_at" %></th>
@@ -13,6 +14,7 @@
     <% @restaurants.each do |restaurant| %>
       <tr>
         <td data-th="<%= Restaurant.human_attribute_name "nom" %>"><%= truncate restaurant.nom.humanize, length: 20 %></td>
+        <td data-th="<%= Restaurant.human_attribute_name "adresse" %>"><%= truncate restaurant.adresse.humanize, length: 20 %></td>
         <td data-th="Restaurateur">
           <%= if restaurant.restaurateur
                 truncate restaurant.restaurateur.humanize, length: 20
@@ -26,8 +28,9 @@
         <td>  
           <ul class="button-group radius">
             <li><%= link_to 'Show', restaurant, class: "button tiny secondary" %></li>
+            <li><%= link_to 'Menus', restaurant_menus_path(restaurant), class: "button tiny secondary" %></li>
             <li><%= link_to 'Edit', edit_restaurant_path(restaurant), class: "button tiny secondary" %></li>
-            <li><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
+            <li><%= link_to 'X', restaurant, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
           </ul>
       </tr>
     <% end %>

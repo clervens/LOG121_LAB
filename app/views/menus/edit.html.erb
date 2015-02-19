@@ -1,0 +1,10 @@
+<h1>Editing menu</h1>
+
+<%= render 'form' %>
+
+<div class="row">
+	<ul class="button-group radius small-12 columns">
+		<li><%= link_to 'Show', [@restaurant, @menu], class: "button tiny secondary" %></li>
+		<li><%= link_to 'Back', restaurant_menus_path(@restaurant), class: "button tiny secondary" %></li>
+	</ul>
+</div>
