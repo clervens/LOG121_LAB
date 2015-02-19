@@ -17,6 +17,12 @@
 #
 
 class Commande < ActiveRecord::Base
+
+  ## Validdations ##
+
+  validates :restaurant_id, :date_de_livraison, presence: true, allow_blank: false
+  validate :expiration_date_cannot_be_in_the_past
+
 	## Associations ##
   
   belongs_to :restaurant
@@ -46,4 +52,10 @@ private
 	def generate_conf_number
 		self.numero = SecureRandom.hex 10
 	end
+
+  def expiration_date_cannot_be_in_the_past
+    if date_de_livraison.present? && date_de_livraison < 1.hour.ago
+      errors.add(:date_de_livraison, "ne peut être dans le passé")
+    end
+  end
 end
