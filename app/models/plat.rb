@@ -24,5 +24,5 @@ class Plat < ActiveRecord::Base
 	
 	## Associations ##
   	
-  	belongs_to :menu
+  belongs_to :menu
 end
