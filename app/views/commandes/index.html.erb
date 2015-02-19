@@ -16,7 +16,7 @@
     <% @commandes.each do |commande| %>
       <tr>
         <td><%= commande.id %></td>
-        <td><%= commande.restaurant.nom %></td>
+        <td><%= link_to commande.restaurant.nom, commande.restaurant %></td>
         <td><%= commande.numero %></td>
         <td><%= l commande.date_de_livraison, format: :short %></td>
         <td><%= l commande.created_at, format: :short %></td>
@@ -30,4 +30,5 @@
 
 <br>
 
-<%= link_to 'New Commande', new_commande_path %>
+<style>li a.button{margin:0;}</style>
+<%= link_to 'New Commande', new_commande_path, class: "button tiny radius secondary" %>

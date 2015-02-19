@@ -1,19 +1,50 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 medium-6 columns">
+	<h2><%= @commande.restaurant.nom %></h2>
+	<p>
+		<strong>Numero de confirmation : </strong><%= @commande.numero %>
+		<br>
+		<strong>Date de livraison : </strong><%= @commande.date_de_livraison %>
+	</p>
+</div>
+<div class="small-12 medium-6 columns">
+	<table style="width: 100%">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Plat</th>
+				<th>Quantité</th>
+				<th>Prix</th>
+				<th>Sous Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% 
+				index = 1
+				@commande.ligne_commandes.each do |lc|
+			%>
+			<tr>
+				<td><%= index %></td>
+				<td><%= lc.plat.nom %></td>
+				<td><%= lc.qte %></td>
+				<td><%= lc.plat.prix %></td>
+				<td><%= lc.qte * lc.plat.prix %> $</td>
+			</tr>
+			<% 
+				index += 1
+				end 
+			%>
+			<tr align="right">
+				<th>Total</th>
+				<th colspan="3" ></th>
+				<th><%= @commande.total %> $</th>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
-<p>
-  <strong>Numero:</strong>
-  <%= @commande.numero %>
-</p>
-
-<p>
-  <strong>Date de livraison:</strong>
-  <%= @commande.date_de_livraison %>
-</p>
-
-<p>
-  <strong>Restaurant:</strong>
-  <%= @commande.restaurant.nom %>
-</p>
-
-<%= link_to 'Edit', edit_commande_path(@commande) %> |
-<%= link_to 'Back', commandes_path %>
+<div class="small-12 columns">
+	<ul class="button-group radius">
+		<li><%= link_to 'Edit', edit_commande_path(@commande), class: "button tiny secondary" %></li>
+		<li><%= link_to 'Back', commandes_path, class: "button tiny secondary" %></li>
+	</ul>
+</div>

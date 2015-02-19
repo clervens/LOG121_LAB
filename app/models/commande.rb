@@ -31,6 +31,16 @@ class Commande < ActiveRecord::Base
 
   before_create :generate_conf_number
 
+
+  def total
+    total = 0
+
+    ligne_commandes.each do |lc|
+      total += lc.qte * lc.plat.prix
+    end
+    total
+  end
+
 private
 
 	def generate_conf_number
