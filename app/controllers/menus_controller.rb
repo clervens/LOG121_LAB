@@ -1,13 +1,10 @@
-class MenusController < InheritedResources::Base
+class MenusController < ApplicationResourcesController
 	before_action :set_restaurant, only: [:new, :index]
 	before_action :set_restaurant_and_menu, only: [:show, :edit, :update, :destroy]
     belongs_to :restaurant
 
-    respond_to :html, :json
-
 	def new
-		@menu = @restaurant.menus.build
-		@plat = @menu.plats.build
+		@menu = @restaurant.menus.builds
 	end
   private
 
@@ -17,6 +14,7 @@ class MenusController < InheritedResources::Base
 
     def set_restaurant_and_menu
     	set_restaurant
+        set_menu
     end
 
     def set_restaurant
