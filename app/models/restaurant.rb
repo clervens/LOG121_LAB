@@ -21,6 +21,7 @@ class Restaurant < ActiveRecord::Base
 	## Associations ##
 
 	has_many :menus
+	has_many :commandes
 
 	def restaurateur
 		mock_restaurateur
