@@ -27,6 +27,7 @@ class Commande < ActiveRecord::Base
   
   belongs_to :restaurant
   has_many :ligne_commandes, dependent: :destroy
+  belongs_to :adresse
   accepts_nested_attributes_for :ligne_commandes, :reject_if => :all_blank, :allow_destroy => true
 
   ## Scopes ##

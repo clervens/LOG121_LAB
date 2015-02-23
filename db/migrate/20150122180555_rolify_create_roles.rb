@@ -1,11 +1,4 @@
 class RolifyCreateRoles < ActiveRecord::Migration
-  def migrate(direction)
-    super
-    if direction == :up
-      user = User.find_by(email: 'admin@example.com')
-      user.add_role :entrepreneur
-    end
-  end
   def change
     create_table(:roles) do |t|
       t.string :name
