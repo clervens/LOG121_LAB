@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    email {"#{random_string}@example.com"}
+    nom {random_string}
+    prenom {random_string}
+    email {"#{prenom}.#{nom}@example.com"}
     password 'qwerty123'
     password_confirmation 'qwerty123'
     # confirmed_at {Time.now}
