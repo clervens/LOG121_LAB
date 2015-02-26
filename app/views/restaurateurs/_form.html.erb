@@ -1,0 +1,26 @@
+<%= form_for(@restaurateur) do |f| %>
+  <% if @restaurateur.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restaurateur.errors.count, "error") %> prohibited this restaurateur from being saved:</h2>
+
+      <ul>
+      <% @restaurateur.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :nom %>
+  </div>
+  <div class="field">
+    <%= f.text_field :prenom %>
+  </div>
+  <div class="field">
+    <%= f.date_select("date_naissance",start_year: 1905) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

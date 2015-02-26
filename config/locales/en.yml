@@ -31,3 +31,6 @@ en:
           attributes:
             nom:
               blank: "can't be blank fool!"
+  was_created: 'was successfully created.'
+  was_updated: 'was successfully updated.'
+  was_destroyed: 'was successfully destroyed.'

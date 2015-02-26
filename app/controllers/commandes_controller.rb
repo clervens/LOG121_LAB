@@ -1,4 +1,4 @@
-class CommandesController < InheritedResources::Base
+class CommandesController < ApplicationResourcesController
 
   private
 

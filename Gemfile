@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
-gem 'puma'
+# gem 'puma' Error with windows
+
+# Use only this gems for Windows Platforms
+gem 'tzinfo-data' if (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
