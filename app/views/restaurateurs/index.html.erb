@@ -1,0 +1,33 @@
+<h1>Listing restaurateurs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Date de naissance</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @restaurateurs.each do |restaurateur| %>
+      <tr>
+        <td><%= restaurateur.nom %></td>
+        <td><%= restaurateur.prenom %></td>
+        <td><%= restaurateur.date_naissance %></td>
+        <td><%= link_to 'Show', restaurateur, class: "button tiny secondary" %></td>
+        <td><%= link_to 'Edit', edit_restaurateur_path(restaurateur), class: "button tiny secondary" %></td>
+        <td><%= link_to 'Destroy', restaurateur, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @restaurateurs.size == 0%>
+    <em>Aucun restaurateur trouvé</em><br>
+<%end%>
+
+<br>
+
+<style>li a.button{margin:0;}</style>
+<%= link_to 'New restaurateur', new_restaurateur_path, class: "button tiny radius secondary" %>
