@@ -8,7 +8,7 @@ module CommandesObserver
 private
   def send_sms_on_etat_change
     if etat_changed?
-      SMS.send message: "Votre commande #{numero}, est maintenant à l'état : #{etat.humanize}"
+      SMS.send to: user.telephone, message: "Votre commande #{numero}, est maintenant à l'état : #{etat.humanize}"
     end
   end
 end

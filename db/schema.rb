@@ -122,6 +122,9 @@ ActiveRecord::Schema.define(version: 20150303184411) do
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nom"
+    t.string   "prenom"
+    t.string   "telephone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,4 +1,8 @@
 class CommandesController < ApplicationResourcesController
+  def create
+    @commande = current_user.commandes.build commande_params
+    super
+  end
 
   private
 
