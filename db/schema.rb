@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219145901) do
+ActiveRecord::Schema.define(version: 20150303160118) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150219145901) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "adresse_id"
+    t.integer  "etat",              default: 0
   end
 
   add_index "commandes", ["adresse_id"], name: "index_commandes_on_adresse_id"

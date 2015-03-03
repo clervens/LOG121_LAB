@@ -9,6 +9,7 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  adresse_id        :integer
+#  etat              :integer          default(0)
 #
 # Indexes
 #
@@ -17,6 +18,7 @@
 #
 
 class Commande < ActiveRecord::Base
+  enum status: [ :demarer, :en_preparation, :prete, :en_cours_de_livraison, :livre ]
 
   ## Validdations ##
 
