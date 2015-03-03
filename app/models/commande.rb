@@ -18,7 +18,7 @@
 #
 
 class Commande < ActiveRecord::Base
-  enum status: [ :demarer, :en_preparation, :prete, :en_cours_de_livraison, :livre ]
+  enum etat: [ :demarrer, :en_preparation, :prete, :en_cours_de_livraison, :livre ]
 
   ## Validdations ##
 
