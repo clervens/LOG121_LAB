@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
-gem 'puma'
+# gem 'puma' Error with windows
+
+# Use only this gems for Windows Platforms
+gem 'tzinfo-data' if (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -29,7 +31,7 @@ group :production do
 	# gem 'newrelic_rpm'
 end
 
-group :development do
+group :development, :test do
 	# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 	gem 'spring'
 	gem "better_errors"
@@ -37,4 +39,7 @@ group :development do
 	gem 'annotate', '~> 2.6.5'
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
 end
+gem 'simplecov', :require => false, group: :test

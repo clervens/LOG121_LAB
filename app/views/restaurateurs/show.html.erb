@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nom:</strong>
+  <%= @restaurateur.nom %>
+</p>
+
+<p>
+  <strong>Prenom:</strong>
+  <%= @restaurateur.prenom %>
+</p>
+
+<p>
+  <strong>Date naissance:</strong>
+  <%= @restaurateur.date_naissance %>
+</p>
+
+<%= link_to 'Edit', edit_restaurateur_path(@restaurateur), class: "button tiny secondary" %> |
+<%= link_to 'Back', restaurateurs_path, class: "button tiny secondary" %>

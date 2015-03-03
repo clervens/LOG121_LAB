@@ -31,3 +31,6 @@ fr:
           attributes:
             nom:
               blank: "ne peut être vide"
+  was_created: 'a été créé(e) avec succès.'
+  was_updated: 'a été modifié(e) avec succès.'
+  was_destroyed: 'a été supprimé(e) avec succès.'

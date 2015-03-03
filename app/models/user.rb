@@ -22,6 +22,9 @@
 #  locked_at              :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
+#  nom                    :string(255)
+#  prenom                 :string(255)
+#  telephone              :string(255)
 #
 # Indexes
 #
@@ -37,4 +40,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
+
+  validates :nom, :prenom, presence: true, allow_blank: false
+
 end

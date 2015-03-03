@@ -1,0 +1,46 @@
+<div class="small-12 columns">
+  <h2>Sign up</h2>
+</div>
+<div class="small-12 medium-8 large-6 columns">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="field">
+    <%= f.text_field :nom, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.text_field :prenom  %>
+    </div>
+
+    <div class="field">
+      <%= f.telephone_field :telephone  %>
+    </div>
+
+    <div class="field">
+    <%= f.email_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "off" %>
+      <% if @validatable %>
+      <small>(<%= @minimum_password_length %> characters minimum)</small>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sign up", class: 'right button small success' %>
+    </div>
+  <% end %>
+</div>
+<%= render "devise/shared/links" %>
+<style>
+  [name='user[password]'] + small {
+    margin-top: -10px;
+    display: block;
+  }
+</style>
