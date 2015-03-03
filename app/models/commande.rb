@@ -9,14 +9,19 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  adresse_id        :integer
+#  etat              :integer          default(0)
+#  user_id           :integer
 #
 # Indexes
 #
 #  index_commandes_on_adresse_id     (adresse_id)
 #  index_commandes_on_restaurant_id  (restaurant_id)
+#  index_commandes_on_user_id        (user_id)
 #
 
 class Commande < ActiveRecord::Base
+  include CommandesObserver
+  enum etat: [ :demarrer, :en_preparation, :prete, :en_cours_de_livraison, :livre ]
 
   ## Validdations ##
 
@@ -27,7 +32,9 @@ class Commande < ActiveRecord::Base
   
   belongs_to :restaurant
   has_many :ligne_commandes, dependent: :destroy
+  belongs_to :adresse
   accepts_nested_attributes_for :ligne_commandes, :reject_if => :all_blank, :allow_destroy => true
+  belongs_to :user
 
   ## Scopes ##
 

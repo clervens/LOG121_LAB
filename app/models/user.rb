@@ -13,11 +13,18 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
 #  failed_attempts        :integer          default(0), not null
 #  unlock_token           :string(255)
 #  locked_at              :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
+#  nom                    :string(255)
+#  prenom                 :string(255)
+#  telephone              :string(255)
 #
 # Indexes
 #
@@ -33,4 +40,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
+
+  validates :nom, :prenom, presence: true, allow_blank: false
+
+  has_many :commandes
+
 end

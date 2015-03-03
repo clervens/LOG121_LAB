@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219145901) do
+ActiveRecord::Schema.define(version: 20150303184411) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -44,10 +44,13 @@ ActiveRecord::Schema.define(version: 20150219145901) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "adresse_id"
+    t.integer  "etat",              default: 0
+    t.integer  "user_id"
   end
 
   add_index "commandes", ["adresse_id"], name: "index_commandes_on_adresse_id"
   add_index "commandes", ["restaurant_id"], name: "index_commandes_on_restaurant_id"
+  add_index "commandes", ["user_id"], name: "index_commandes_on_user_id"
 
   create_table "ligne_commandes", force: true do |t|
     t.integer  "qte"
@@ -110,11 +113,18 @@ ActiveRecord::Schema.define(version: 20150219145901) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nom"
+    t.string   "prenom"
+    t.string   "telephone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

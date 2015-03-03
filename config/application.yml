@@ -1,9 +1,0 @@
-development:
-  SMTP_USERNAME: clervens.volcy@gmail.com
-  SMTP_PASSWORD: 
-  twilio_account_sid: AC4206ee92cd8dcc21c333ebce5e919b96
-  twilio_auth_token: 2652d55a49fefe4c59223144da440dca
-  twilio_phone_number: '4387951373'
-  Default_SMS_Number: '4388252270'
-test:
-production:
