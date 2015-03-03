@@ -57,6 +57,9 @@
     <div class="small-12 columns datetime">
       <%= f.datetime_select :date_de_livraison, {}, {} %>
     </div>
+    <div class="small-12 columns">
+    	<%= f.select :etat, :collection => Commande.etats.keys.to_a %>
+    </div>
   </div>
 	<div class="row">
 		<div class="small-12 columns">
