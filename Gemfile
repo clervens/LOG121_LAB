@@ -7,7 +7,7 @@ gem 'rails', '4.1.5'
 # Use only this gems for Windows Platforms
 gem 'tzinfo-data' if (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
 
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'underscore-rails'
