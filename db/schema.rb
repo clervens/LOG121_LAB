@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303184411) do
+ActiveRecord::Schema.define(version: 20150305195825) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20150303184411) do
 
   add_index "ligne_commandes", ["commande_id"], name: "index_ligne_commandes_on_commande_id"
   add_index "ligne_commandes", ["plat_id"], name: "index_ligne_commandes_on_plat_id"
+
+  create_table "livraisons", force: true do |t|
+    t.integer  "commande_id"
+    t.integer  "user_id"
+    t.text     "adresse"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "livraisons", ["commande_id"], name: "index_livraisons_on_commande_id"
+  add_index "livraisons", ["user_id"], name: "index_livraisons_on_user_id"
 
   create_table "menus", force: true do |t|
     t.string   "nom"
@@ -125,6 +136,7 @@ ActiveRecord::Schema.define(version: 20150303184411) do
     t.string   "nom"
     t.string   "prenom"
     t.string   "telephone"
+    t.date     "date_de_naissance"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

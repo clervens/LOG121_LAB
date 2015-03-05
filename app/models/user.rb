@@ -25,6 +25,7 @@
 #  nom                    :string(255)
 #  prenom                 :string(255)
 #  telephone              :string(255)
+#  date_de_naissance      :date
 #
 # Indexes
 #
