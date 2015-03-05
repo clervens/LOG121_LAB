@@ -3,9 +3,16 @@ Rails.application.routes.draw do
 	  devise_for :users
 	  ActiveAdmin.routes(self)
 	  root 'static_pages#home'
-	  resources :commandes
+	  resources :commandes do
+      collection do
+        get '/pretes', to: 'commandes#pretes'
+        get '/get_map', to: 'commandes#get_map'
+      end
+    end
 	  resources :restaurants do
 	  	resources :menus
+      resources :livraisons
+      resources :commandes
 	  end
 	 end
 end

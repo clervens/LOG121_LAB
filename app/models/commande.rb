@@ -35,6 +35,7 @@ class Commande < ActiveRecord::Base
   belongs_to :adresse
   accepts_nested_attributes_for :ligne_commandes, :reject_if => :all_blank, :allow_destroy => true
   belongs_to :user
+  has_one :livraison
 
   ## Scopes ##
 
@@ -54,6 +55,24 @@ class Commande < ActiveRecord::Base
     total
   end
 
+  # Changement d'état
+
+  def préparer
+    change_etat(:en_preparation)
+  end
+
+  def completer_preparation
+    change_etat(:prete)
+  end
+
+  def debuter_livraison
+    change_etat(:en_cours_de_livraison)
+  end
+
+  def livrer
+    change_etat(:livre)
+  end
+
 private
 
 	def generate_conf_number
@@ -64,5 +83,10 @@ private
     if date_de_livraison.present? && date_de_livraison < 1.hour.ago
       errors.add(:date_de_livraison, "ne peut être dans le passé")
     end
+  end
+
+  def change_etat(nouvel_etat)
+    self.etat = nouvel_etat
+    self.save
   end
 end

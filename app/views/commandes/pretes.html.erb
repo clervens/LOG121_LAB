@@ -1,0 +1,94 @@
+<div class="small-12 columns">
+  <%= form_for @commandes.first do %>
+  <fieldset>
+    <legend>Adresse Courante</legend>
+    <input type="text" id="adresse_courante" value="4777 Avenue Pierre-de Coubertin, Montréal, QC H1V 1B3">
+    <input type="button" value="confirmer" class="button tiny radius right" onclick="set_distance_adresses()">
+    <a class="etape_1 next hide"></a>
+  </fieldset>
+  <fieldset>
+    <% @commandes.each do |commande| %>
+    <div class="small-12 medium-6 large-4 columns">
+      <div class="data commande panel radius" onclick="get_map(this);" data-id="<%= commande.id %>" data-restaurant="<%= commande.restaurant.adresse %>">
+        <p>
+          <%= commande.restaurant.nom %><br>
+          <span>Distance : </span><b class="distance"></b><br>
+          <small><%= commande.numero %></small>
+        </p>
+        <span class="adresse"><%= commande.adresse.value %></span><br>
+        <div class="date-de-livraison">Date de Livraison : <%= l commande.date_de_livraison, format: :short %></div>
+      </div>
+    </div>
+    <% end %>
+    <div class="small-12 columns">
+      <a class="etape_2 next hide">Next</a>
+      <a class="etape_2 previous left button tiny radius">Prev</a>
+    </div>
+  </fieldset>
+  <fieldset>
+    <iframe id="GMapLivraison" width="100%" height="450" frameborder="0" style="border:0" src=""></iframe>
+    <div class="form_livraison"></div>
+    <a class="button tiny radius previous">Prev</a>
+  </fieldset>
+
+  <% end %>
+</div>
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWkuvRdZ36KjkavgKrzztEOAxEBukStPc">
+    </script>
+<script>
+  function set_distance_adresses(){
+    if (!$("#adresse_courante").val()) {
+      return
+    }
+    var adresse_courante = $("#adresse_courante").val();
+    var destinations = $(".commande .adresse").map(function() {return $(this).text();}).get();
+    var distanceService = new google.maps.DistanceMatrixService();
+    distanceService.getDistanceMatrix({
+        origins: [adresse_courante],
+        destinations: destinations,
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC,
+        durationInTraffic: true,
+        avoidHighways: false,
+        avoidTolls: false
+      },
+      function (response, status) {
+        if (status !== google.maps.DistanceMatrixStatus.OK) {
+            console.log('Error:', status);
+            return;
+        } else {
+          console.log(response);
+          var distanceFields = $(".commande .distance");
+          $.each(response.rows[0].elements, function(index, elm){
+            $(distanceFields[index]).text(elm.distance.text);
+          });
+          $('.etape_1.next').click();
+        }
+    });
+  };
+
+  function get_map(panel) {
+    var adresse = $("#adresse_courante").val();
+    var restaurant = $(panel).data('restaurant');
+    var destination = $(panel).find('.adresse').text();
+    $.get('/commandes/get_map.json', {
+      adresse: adresse,
+      commande_id: $(panel).data('id')
+    }, function(data){
+      console.log(data);
+      $('.form_livraison').html($(data.form));
+      $('.etape_2.next').click();
+      $('#GMapLivraison').attr('src', "https://www.google.com/maps/embed/v1/directions?waypoints="+restaurant+"&origin="+adresse+"&destination="+destination+"&key=AIzaSyBWkuvRdZ36KjkavgKrzztEOAxEBukStPc");
+    });
+  }
+</script>
+
+<style>
+  .data.commande {
+    cursor: pointer;
+  }
+  .data.commande:hover {
+    background: #FAFAFA;
+  }
+</style>
