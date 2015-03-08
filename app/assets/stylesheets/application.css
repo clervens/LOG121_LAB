@@ -14,6 +14,6 @@
  *= require foundation_and_overrides
  *= require scaffolds
  *= require _formsteps
- *= require static_pages
- *= require restaurants
+ *= require_tree .
+ *= stub active_admin
  */

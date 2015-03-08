@@ -82,15 +82,18 @@ Commande.create!([{
     date_de_livraison: 1.hour.from_now,
     restaurant_id: 1,
     adresse_id: 1,
-    ligne_commandes_attributes: [{qte: 70, plat_id: 1}]
+    ligne_commandes_attributes: [{qte: 70, plat_id: 1}],
+    user_id: 1
   }, {
     date_de_livraison: 3.hour.from_now,
     restaurant_id: 1,
     adresse_id: 1,
-    ligne_commandes_attributes: [{qte: 2, plat_id: 1}, {qte: 1, plat_id: 2}]
+    ligne_commandes_attributes: [{qte: 2, plat_id: 1}, {qte: 1, plat_id: 2}],
+    user_id: 1
   }, {
     date_de_livraison: 4.days.from_now,
     restaurant_id: 1,
     adresse_id: 1,
-    ligne_commandes_attributes: [{qte: 3, plat_id: 1}, {qte: 5, plat_id: 2}, {qte: 8, plat_id: 3}, {qte: 14, plat_id: 4}]
+    ligne_commandes_attributes: [{qte: 3, plat_id: 1}, {qte: 5, plat_id: 2}, {qte: 8, plat_id: 3}, {qte: 14, plat_id: 4}],
+    user_id: 1
 }])
