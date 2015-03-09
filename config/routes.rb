@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 	  resources :restaurants do
 	  	resources :menus
 	  end
-	 end
+	end
   ActiveAdmin.routes(self)
 end
