@@ -1,0 +1,88 @@
+<%= stylesheet_link_tag  "application" %>
+<div class="small-12 medium-6 columns">
+  <h2>Équipe 10</h2>
+</div>
+<div class="small-12 medium-6 columns">
+  <div class="panel radius">
+    <h3><%= @restaurant.nom.capitalize %></h3><br>
+    <%= @restaurant.adresse %>
+  </div>
+</div>
+<div class="small-12 columns">
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <p><%= "#{@user.nom}, #{@user.prenom}"%></p>
+      <p><%= @commande.adresse.value %></p>
+    </div>
+    <div class="small-12 medium-6 columns">
+      <div class="panel radius">
+        <p>
+          # <%= @commande.id %><br>
+          <b>Date de commande :</b> <%= l @commande.created_at, format: :long %><br>
+          <b>Numéro de confirmation :</b> <%= @commande.numero %><br>
+          <b>Date de livraison :</b> <%= l @commande.date_de_livraison, format: :long %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <h3>Facture</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th style="width: 65%;">Description</th>
+            <th>Qantité</th>
+            <th>Prix Unitaire</th>
+            <th class="right">Prix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% index = 1 %>
+          <% @commande.ligne_commandes.each do |lc| %>
+            <tr>
+              <td data-th="#">
+                <div class="data"><%= index %></div>
+              </td>
+              <td data-th="Description">
+                <div class="data"><%= lc.plat.description %></div>
+              </td>
+              <td data-th="Qantité">
+                <div class="data"><%= lc.qte %></div>
+              </td>
+              <td data-th="Prix Unitaire">
+                <div class="data"><%= lc.plat.prix %> $</div>
+              </td>
+              <td data-th="Prix">
+                <div class="data" style="text-align: right"><%= lc.prix %>
+              </td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="3"></td>
+            <td data-th="Sous Total" colspan="2"><b>Sous Total</b> <span class="right"><%= @commande.total %> $</span></td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td data-th="Total" colspan="2"><b>Total</b> <span class="right"><%= @commande.total * 1.1425 %> $</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+    </div>
+  </div>
+</div>
+<style>
+  @media only screen and (max-width: 620px) {
+    table.table td .data {
+      text-align: right;
+    }
+    .data.description {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 188px;
+    }
+  }
+</style>
