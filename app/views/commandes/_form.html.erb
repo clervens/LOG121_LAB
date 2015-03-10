@@ -61,8 +61,13 @@
     <fieldset>
       <legend>Confirmation</legend>
       <div class="row">
-        <div class="small-12 columns">
-          <%= f.collection_select(:adresse_id, Adresse.all, :id, :value) %>
+        <div class="small-12 medium-6 columns">
+          <%= f.collection_select(:adresse_id, current_user.adresse.all.order(created_at: :desc), :id, :value) %>
+        </div>
+        <div class="orborder small-12 medium-6 columns">
+          <%= f.fields_for :adresse_attributes do |ff| %>
+            <%= ff.text_field :value, label: 'Adresse' %>
+          <% end %>
         </div>
         <div class="small-12 columns datetime">
           <%= f.datetime_select :date_de_livraison, {}, {} %>
@@ -98,7 +103,7 @@
     $('#commande_restaurant_id').val(menus[$('input[type=number]').data('menu-index')].id);
     $('input[type=number]').each(function(){
       qte = $(this).val();
-      if (!!qte){
+      if (!!qte && qte > 0){
         menu = menus[$(this).data('menu-index')];
         plat = menu.plats[$(this).data('index')]
 
@@ -156,5 +161,21 @@
   }
   fieldset {
     width: 97%;
+  }
+  .orborder {
+    border-left: #DDDDDD solid 1px;
+  }
+  .orborder:before {
+    position: absolute;
+    left: -11px;
+    top: 38%;
+    background: white;
+    content: 'OU';
+  }
+  @media only screen and (max-width: 40.063em) {
+    .orborder:before {
+      left: 50%;
+      top: -9px;
+    }
   }
 </style>
