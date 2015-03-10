@@ -72,35 +72,37 @@ input[type="number"] {
 //     width: 100%;
 //   }
 @media only screen and (max-width: 620px) {
-  table th,
-   table td {
-    padding-left: 125px !important;
-    position: relative;
-  }
-  table thead tr th {
-    display: none;
-  }
-  table td {
-    display: block !important;
-    padding-bottom: 13px !important;
-    padding-top: 13px !important;
-  }
-  table td:before {
-    background: #333333;
-    border-right: 2px solid #ffffff;
-    bottom: 0;
-    color: #ffffff;
-    content: attr(data-th);
-    display: inline-block;
-    font-family: "Roboto Condensed", Helvetica, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    left: 0;
-    max-height: 100%;
-    padding-left: 13px;
-    padding-top: 13px;
-    position: absolute;
-    top: 0;
-    width: 120px;
+  table.responsive {
+    width: 100%;
+    th,td {
+      padding-left: 125px !important;
+      position: relative;
+    }
+    thead tr th {
+      display: none;
+    }
+    td {
+      display: block !important;
+      padding-bottom: 13px !important;
+      padding-top: 13px !important;
+    }
+    td:before {
+      background: #333333;
+      border-right: 2px solid #ffffff;
+      bottom: 0;
+      color: #ffffff;
+      content: attr(data-th);
+      display: inline-block;
+      font-family: "Roboto Condensed", Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      left: 0;
+      max-height: 100%;
+      padding-left: 13px;
+      padding-top: 13px;
+      position: absolute;
+      top: 0;
+      width: 120px;
+    }
   }
 }
