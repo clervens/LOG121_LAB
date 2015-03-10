@@ -62,7 +62,7 @@
       <legend>Confirmation</legend>
       <div class="row">
         <div class="small-12 medium-6 columns">
-          <%= f.collection_select(:adresse_id, current_user.adresse.all, :id, :value) %>
+          <%= f.collection_select(:adresse_id, current_user.adresse.all.order(created_at: :desc), :id, :value) %>
         </div>
         <div class="orborder small-12 medium-6 columns">
           <%= f.fields_for :adresse_attributes do |ff| %>
