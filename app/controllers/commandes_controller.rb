@@ -1,5 +1,7 @@
 class CommandesController < ApplicationResourcesController
   before_filter :set_cors_fix
+  after_action :send_mail, only: :create
+  
   def create
     @commande = current_user.commandes.build commande_params
     super
@@ -20,7 +22,11 @@ class CommandesController < ApplicationResourcesController
   private
 
     def commande_params
-      params.require(:commande).permit({ligne_commandes_attributes: [:id, :qte, :plat_id, :_destroy]}, :numero, :date_de_livraison, :restaurant_id, :adresse_id, :etat)
+      params.require(:commande).permit({adresse_attributes: [:value]},{ligne_commandes_attributes: [:id, :qte, :plat_id, :_destroy]}, :numero, :date_de_livraison, :restaurant_id, :adresse_id, :etat)
+    end
+
+    def send_mail
+      CommandeMailer.confirmation(@commande).deliver
     end
 
     def set_cors_fix

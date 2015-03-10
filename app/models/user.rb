@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   validates :nom, :prenom, presence: true, allow_blank: false
 
   has_many :commandes
+  has_many :adresse
   has_many :livraisons
 
 end
