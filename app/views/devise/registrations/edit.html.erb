@@ -1,48 +1,74 @@
 <div class="small-12 columns">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 </div>
-<div class="small-12 medium-8 columns">
+<div class="small-12 columns">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
+    <div class="row">
+      <div class="small-12 medium-8 columns">
+        <div class="field">
+        <%= f.text_field :nom, autofocus: true %>
+        </div>
 
-    <div class="field">
-    <%= f.text_field :nom, autofocus: true %>
-    </div>
+        <div class="field">
+          <%= f.text_field :prenom  %>
+        </div>
 
-    <div class="field">
-      <%= f.text_field :prenom  %>
-    </div>
+        <div class="field">
+          <%= f.telephone_field :telephone  %>
+        </div>
 
-    <div class="field">
-      <%= f.telephone_field :telephone  %>
-    </div>
+        <div class="field">
+          <%= f.date_field :date_de_naissance  %>
+        </div>
+      </div>
+      <div class="small-12 medium-4 columns">
+        <div class="field">
+          <%= f.email_field :email, autofocus: true %>
+        </div>
 
-    <div class="field">
-      <%= f.date_field :date_de_naissance  %>
-    </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
 
+        <div class="field">
+          <i>(leave blank if you don't want to change it)</i>
+          <%= f.password_field :password, autocomplete: "off" %>
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        </div>
 
-    <div class="field">
-      <%= f.email_field :email, autofocus: true %>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div class="field">
-      <i>(leave blank if you don't want to change it)</i>
-      <%= f.password_field :password, autocomplete: "off" %>
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-
-    <div class="field">
-      <%= f.password_field :current_password, autocomplete: "off" %>
-      <small><i>(we need your current password to confirm your changes)</i></small>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Update", class: 'button success small right' %>
+        <div class="field">
+          <%= f.password_field :current_password, autocomplete: "off" %>
+          <small><i>(we need your current password to confirm your changes)</i></small>
+        </div>
+      </div>
+      <div class="small-12 columns">
+        <div class="field row">
+          <div class="small-12 columns">
+            <h4>Adresses</h4>
+          </div>
+          <%= f.fields_for :adresses do |ff| %>
+            <div class="small-12 medium-6 large-4 adresse left columns">
+              <%= ff.object.value %>
+              <%= ff.hidden_field :id %>
+              <%= ff.hidden_field :value %>
+            </div>
+          <% end %>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="small-12 medium-6 large-4 columns">
+            <%= f.fields_for :adresses, resource.adresses.new do |ffn| %>
+              <%= ffn.text_field :value, label: 'Nouvelle Adresse' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="small-12 columns">
+        <div class="actions">
+          <%= f.submit "Update", class: 'button success small right' %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
@@ -57,5 +83,10 @@
   [name="user[current_password]"] + small {
     display: block;
     margin-top: -10px;
+  }
+  .adresse.left {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 </style>

@@ -42,9 +42,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
+  ## Validations ##
+
   validates :nom, :prenom, presence: true, allow_blank: false
 
+  ## Associations ##
+
   has_many :commandes
-  has_many :adresse
+  has_many :adresses
+  accepts_nested_attributes_for :adresses, :reject_if => :all_blank
 
 end
