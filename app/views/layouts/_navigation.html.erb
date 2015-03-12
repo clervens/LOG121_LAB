@@ -14,7 +14,7 @@
         <li class="has-dropdown">
           <%= link_to current_user.email, '#', style: 'cursor: default;text-decoration: none;' %>
           <ul class="dropdown">
-            <li><a href="#">Settings</a></li>
+            <li><a href="#"><%= link_to "Paramètre", edit_user_registration_path %></a></li>
             <li class="active"><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
