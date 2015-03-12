@@ -4,7 +4,7 @@ class MenusController < ApplicationResourcesController
     belongs_to :restaurant
 
 	def new
-		@menu = @restaurant.menus.builds
+		@menu = @restaurant.menus.build
 	end
   private
 
