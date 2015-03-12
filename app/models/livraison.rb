@@ -22,6 +22,10 @@ class Livraison < ActiveRecord::Base
   belongs_to :commande
   belongs_to :user
 
+  ## Validations ##
+
+  validates :commande_id, uniqueness: {message: " : Une livraison est déjà en cours"}
+
   ## Callbacks ##
 
   after_create :change_etat_commande

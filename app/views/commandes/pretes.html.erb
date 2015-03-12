@@ -1,4 +1,5 @@
 <div class="small-12 columns">
+  <% if @commandes.first %>
   <%= form_for @commandes.first do %>
   <fieldset>
     <legend>Adresse Courante</legend>
@@ -31,6 +32,9 @@
     <a class="button tiny radius previous">Prev</a>
   </fieldset>
 
+  <% end %>
+  <% else %>
+    <h2>Aucune Commande n'est pretes</h2>
   <% end %>
 </div>
 <script type="text/javascript"
