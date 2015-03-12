@@ -22,7 +22,11 @@
     <fieldset>
       <legend>Restaurants</legend>
       <% Restaurant.all.each do |restaurant| %>
-        <a class="next" data-restaurant-id='<%= restaurant.id%>' onclick='select_restaurant(this);'><%= restaurant.nom %></a>
+        <div class="small-12 medium-6 large-4 columns">
+          <div class="panel radius next" data-restaurant-id='<%= restaurant.id%>' onclick='select_restaurant(this);'>
+            <%= restaurant.nom %>
+          </div>
+        </div>
       <% end %>
     </fieldset>
     <fieldset>
@@ -177,5 +181,8 @@
       left: 50%;
       top: -9px;
     }
+  }
+  .panel.radius.next {
+    cursor: pointer;
   }
 </style>

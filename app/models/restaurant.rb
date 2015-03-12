@@ -22,6 +22,7 @@ class Restaurant < ActiveRecord::Base
 
 	has_many :menus
 	has_many :commandes
+	has_many :livraisons, through: :commandes
 
 	def restaurateur
 		mock_restaurateur
