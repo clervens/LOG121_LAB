@@ -1,9 +1,12 @@
 class LivraisonsController < ApplicationResourcesController
+
   belongs_to :restaurant
 
   def create
-    # @livraison = current_user.livraisons.build
-    super
+    create! do |success, failure|
+      success.html { redirect_to pretes_commandes_url, notice: "La livraison à été créée" }
+      failure.html { redirect_to pretes_commandes_url, alert: @livraison.errors.full_messages.join(", ") }
+    end
   end
 
   private
