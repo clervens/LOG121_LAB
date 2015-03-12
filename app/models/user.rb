@@ -25,6 +25,7 @@
 #  nom                    :string(255)
 #  prenom                 :string(255)
 #  telephone              :string(255)
+#  date_de_naissance      :date
 #
 # Indexes
 #
@@ -41,9 +42,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
+  ## Validations ##
+
   validates :nom, :prenom, presence: true, allow_blank: false
 
+  ## Associations ##
+
   has_many :commandes
-  has_many :adresse
+  has_many :adresses
+  accepts_nested_attributes_for :adresses, :reject_if => :all_blank
 
 end
