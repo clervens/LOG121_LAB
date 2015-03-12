@@ -26,7 +26,7 @@ class Commande < ActiveRecord::Base
   ## Validdations ##
 
   validates :restaurant_id, :date_de_livraison, presence: true, allow_blank: false
-  validate :expiration_date_cannot_be_in_the_past
+  validate :expiration_date_cannot_be_in_the_past, on: :create
 
 	## Associations ##
   
