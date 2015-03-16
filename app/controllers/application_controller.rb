@@ -14,6 +14,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << [{adresses_attributes: [:id, :value]}, :nom, :prenom, :telephone, :date_de_naissance]
     devise_parameter_sanitizer.for(:account_update) << [{adresses_attributes: [:id, :value]}, :nom, :prenom, :telephone, :date_de_naissance]
   end
+
+  # Pour la gestion du user courant dans l'application native
+  def current_user
+    @current_user ||= if params[:cuid]
+      User.find(params[:cuid])
+    else
+      super
+    end
+  end
 	
 private
 	def set_locale
