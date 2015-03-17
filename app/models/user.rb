@@ -25,6 +25,7 @@
 #  nom                    :string(255)
 #  prenom                 :string(255)
 #  telephone              :string(255)
+#  date_de_naissance      :date
 #
 # Indexes
 #
@@ -44,5 +45,8 @@ class User < ActiveRecord::Base
   validates :nom, :prenom, presence: true, allow_blank: false
 
   has_many :commandes
+  has_many :livraisons
+  has_many :adresses
+  accepts_nested_attributes_for :adresses, :reject_if => :all_blank
 
 end

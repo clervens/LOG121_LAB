@@ -14,7 +14,7 @@
         <li class="has-dropdown">
           <%= link_to current_user.email, '#', style: 'cursor: default;text-decoration: none;' %>
           <ul class="dropdown">
-            <li><a href="#">Settings</a></li>
+            <li><a href="#"><%= link_to "Paramètre", edit_user_registration_path %></a></li>
             <li class="active"><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
@@ -26,14 +26,11 @@
 
       <!-- Left Nav Section -->
       <ul class="left">
-        <li class="has-dropdown">
-          <a href="#">Gestionnaire</a>
-          <ul class="dropdown">
-            <!-- <li><label>Scopes</label></li> -->
-            <li><%= link_to "Restaurants", restaurants_path %></li>
-            <li><%= link_to "Commandes", commandes_path %></li>
-          </ul>
-        </li>
+      <% if user_signed_in? %>
+        <% current_user.roles.pluck(:name).each do |role| %>
+          <%= render_navigation role %>
+        <% end %>
+      <% end %>
       </ul>
     </section>
 </nav>

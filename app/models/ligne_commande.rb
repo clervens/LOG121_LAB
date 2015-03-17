@@ -20,4 +20,8 @@ class LigneCommande < ActiveRecord::Base
 
   belongs_to :commande, touch: true
   belongs_to :plat
+
+  def prix
+    self.qte * plat.prix
+  end
 end
