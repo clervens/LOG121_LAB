@@ -51,7 +51,7 @@ class Commande < ActiveRecord::Base
     total = 0
 
     ligne_commandes.each do |lc|
-      total += lc.qte * lc.plat.prix
+      total += lc.prix
     end
     total
   end

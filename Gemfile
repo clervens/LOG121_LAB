@@ -18,7 +18,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'dalli'
 
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.4.0'
 gem 'foundation_rails_helper'
 gem 'devise', "~>3.4.0"
 gem "rolify", "3.4.1"
