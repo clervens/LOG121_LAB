@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :livraisons
       resources :commandes
 	  end
+    match "/hook" => "commandes#hook", as: 'demarer_commande', via: :all
 	end
   ActiveAdmin.routes(self)
 end

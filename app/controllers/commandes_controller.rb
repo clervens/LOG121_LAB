@@ -4,7 +4,16 @@ class CommandesController < ApplicationResourcesController
   
   def create
     @commande = current_user.commandes.build commande_params
-    super
+    if @commande.save
+      redirect_to paypal_url(demarer_commande_path(@registration))
+    else
+      super
+    end
+  end
+
+  def hook
+    puts params.inspect
+    render nothing: true
   end
 
   def pretes
@@ -34,6 +43,21 @@ class CommandesController < ApplicationResourcesController
       headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
       headers['Access-Control-Request-Method'] = '*'
       headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    end
+
+    def paypal_url(return_path)
+      values = {
+          business: "log210_e10_b@etsmtl.net",
+          cmd: "_xclick",
+          upload: 1,
+          return: "#{request.host_with_port}#{return_path}",
+          invoice: @commande.id,
+          amount: @commande.total,
+          item_name: "#{@commande.restaurant.nom} | Commande [log210_e10@etsmtl.net:qwerty123]",
+          item_number: @commande.numero,
+          quantity: '1'
+      }
+      "https://www.sandbox.paypal.com/cgi-bin/webscr?#{values.to_query}"
     end
 end
 
