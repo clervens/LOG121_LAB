@@ -27,7 +27,7 @@ user = User.find_by(email: 'admin@example.com')
 
 Restaurant.create!([{
   nom: "Noma",
-  adresse: "Copenhague, Danemark"
+  adresse: "200 Rue Beaubien Est, Montréal, QC H2S 1R4"
 }, {
   nom: "Eleven Madison Park",
   adresse: "New York, USA"
@@ -80,13 +80,13 @@ end
 
 Commande.create!([{
     date_de_livraison: 1.hour.from_now,
-    restaurant_id: 3,
+    restaurant_id: 1,
     adresse_id: 1,
     ligne_commandes_attributes: [{qte: 70, plat_id: 1}],
     user_id: 1
   }, {
     date_de_livraison: 3.hour.from_now,
-    restaurant_id: 3,
+    restaurant_id: 2,
     adresse_id: 1,
     ligne_commandes_attributes: [{qte: 2, plat_id: 1}, {qte: 1, plat_id: 2}],
     user_id: 1
