@@ -89,5 +89,6 @@ private
   def change_etat(nouvel_etat)
     self.etat = nouvel_etat
     self.save
+    true
   end
 end
