@@ -8,8 +8,9 @@
     <a class="etape_1 next hide"></a>
   </fieldset>
   <fieldset>
+    <div id="commandes-pretes"></div>
     <% @commandes.each do |commande| %>
-    <div class="small-12 medium-6 large-4 columns">
+    <div class="small-12 medium-6 large-4 columns js-commande-wrapper">
       <div class="data commande panel radius" onclick="get_map(this);" data-id="<%= commande.id %>" data-restaurant="<%= commande.restaurant.adresse %>">
         <p>
           <%= commande.restaurant.nom %><br>
@@ -46,31 +47,61 @@
       return
     }
     var adresse_courante = $("#adresse_courante").val();
+    var restaurants = $(".commande").map(function() {return $(this).data('restaurant');}).get();
     var destinations = $(".commande .adresse").map(function() {return $(this).text();}).get();
-    var distanceService = new google.maps.DistanceMatrixService();
-    distanceService.getDistanceMatrix({
-        origins: [adresse_courante],
-        destinations: destinations,
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC,
-        durationInTraffic: true,
-        avoidHighways: false,
-        avoidTolls: false
-      },
-      function (response, status) {
-        if (status !== google.maps.DistanceMatrixStatus.OK) {
+    var distanceRestaurant = new google.maps.DistanceMatrixService();
+    distanceRestaurant.getDistanceMatrix({
+      origins: [adresse_courante],
+      destinations: restaurants,
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      durationInTraffic: true,
+      avoidHighways: false,
+      avoidTolls: false
+    },
+    function (response, status) {
+      if (status !== google.maps.DistanceMatrixStatus.OK) {
+        console.log('Error:', status);
+        return;
+      } else {
+        var distanceFields = $(".commande");
+        $.each(response.rows[0].elements, function(index, elm){
+          $(distanceFields[index]).data('distance-restaurant', parseFloat(elm.distance.text));
+        });
+        var distanceService = new google.maps.DistanceMatrixService();
+        distanceService.getDistanceMatrix({
+          origins: [adresse_courante],
+          destinations: destinations,
+          travelMode: google.maps.TravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.METRIC,
+          durationInTraffic: true,
+          avoidHighways: false,
+          avoidTolls: false
+        },
+        function (response, status) {
+          if (status !== google.maps.DistanceMatrixStatus.OK) {
             console.log('Error:', status);
             return;
-        } else {
-          console.log(response);
-          var distanceFields = $(".commande .distance");
-          $.each(response.rows[0].elements, function(index, elm){
-            $(distanceFields[index]).text(elm.distance.text);
-          });
-          $('.etape_1.next').click();
-        }
+          } else {
+            console.log(response);
+            var distanceFields = $(".commande .distance");
+            $.each(response.rows[0].elements, function(index, elm){
+              distance = parseFloat(elm.distance.text) + $(distanceFields[index]).parents(".commande").data('distance-restaurant')
+              $(distanceFields[index]).parents(".commande").data('full-distance', distance);
+              $(distanceFields[index]).text(""+ distance + " Km");
+            });
+            $('.etape_1.next').click();
+            $('.js-commande-wrapper').sort(function (a, b) {
+
+              var contentA = $(a).find('.commande').data('full-distance');
+              var contentB = $(b).find('.commande').data('full-distance');
+              return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+           }).appendTo('#commandes-pretes');
+          }
+        });
+      }
     });
-  };
+};
 
   function get_map(panel) {
     var adresse = $("#adresse_courante").val();
