@@ -1,6 +1,4 @@
-<h1>Listing restaurateurs</h1>
-
-<table>
+<table class="table responsive">
   <thead>
     <tr>
       <th>Nom</th>
@@ -13,17 +11,21 @@
   <tbody>
     <% @restaurateurs.each do |restaurateur| %>
       <tr>
-        <td><%= restaurateur.nom %></td>
-        <td><%= restaurateur.prenom %></td>
-        <td><%= restaurateur.date_naissance %></td>
-        <td><%= link_to 'Show', restaurateur, class: "button tiny secondary" %></td>
-        <td><%= link_to 'Edit', edit_restaurateur_path(restaurateur), class: "button tiny secondary" %></td>
-        <td><%= link_to 'Destroy', restaurateur, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></td>
+        <td data-th="Nom"><%= restaurateur.nom %></td>
+        <td data-th="Prenom"><%= restaurateur.prenom %></td>
+        <td data-th="Date de naissance"><%= restaurateur.date_de_naissance %></td>
+        <td>
+          <ul class="button-group radius">
+            <li><%= link_to 'Show', restaurateur_path(restaurateur), class: "button tiny secondary" %></li>
+            <li><%= link_to 'Edit', edit_restaurateur_path(restaurateur), class: "button tiny secondary" %></li>
+            <li><%= link_to 'X', restaurateur_path(restaurateur), method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
+          </ul>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<% if @restaurateurs.size == 0%>
+<% if @restaurateurs.size == 0 %>
     <em>Aucun restaurateur trouvé</em><br>
 <%end%>
 
