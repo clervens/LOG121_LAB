@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :livraisons
       resources :commandes
 	  end
+    resources :restaurateurs
 	end
   ActiveAdmin.routes(self)
 end
