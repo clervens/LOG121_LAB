@@ -15,14 +15,18 @@
   <tbody>
     <% @commandes.each do |commande| %>
       <tr>
-        <td><%= commande.id %></td>
-        <td><%= link_to commande.restaurant.nom, commande.restaurant %></td>
-        <td><%= commande.numero %></td>
-        <td><%= l commande.date_de_livraison, format: :short %></td>
-        <td><%= l commande.created_at, format: :short %></td>
-        <td><%= link_to 'Show', commande %></td>
-        <td><%= link_to 'Edit', edit_commande_path(commande) %></td>
-        <td><%= link_to 'Destroy', commande, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td data-th="#"><%= commande.id %></td>
+        <td data-th="Restaurant"><%= link_to commande.restaurant.nom, commande.restaurant %></td>
+        <td data-th="Numero de Confirmation"><%= commande.numero %></td>
+        <td data-th="Date de livraison"><%= l commande.date_de_livraison, format: :short %></td>
+        <td data-th="Date de Création"><%= l commande.created_at, format: :short %></td>
+        <td>
+          <ul class="button-group radius">
+            <li><%= link_to 'Show', commande, class: "button tiny secondary" %></li>
+            <li><%= link_to 'Edit', edit_commande_path(commande), class: "button tiny secondary" %></li>
+            <li><%= link_to 'X', commande, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
+          </ul>
+        </td>
       </tr>
     <% end %>
   </tbody>
