@@ -7,13 +7,13 @@ Rails.application.routes.draw do
         get '/pretes', to: 'commandes#pretes'
         get '/get_map', to: 'commandes#get_map'
       end
+      match "/hook" => "commandes#hook", as: 'demarrer', via: :all
     end
 	  resources :restaurants do
 	  	resources :menus
       resources :livraisons
       resources :commandes
 	  end
-    match "/hook" => "commandes#hook", as: 'demarer_commande', via: :all
 	end
   ActiveAdmin.routes(self)
 end

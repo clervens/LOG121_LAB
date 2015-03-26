@@ -1,18 +1,26 @@
 class CommandesController < ApplicationResourcesController
   before_filter :set_cors_fix
   after_action :send_mail, only: :create
+  protect_from_forgery except: [:hook]
+  skip_before_action :authenticate_user!, only: :hook
   
   def create
     @commande = current_user.commandes.build commande_params
     if @commande.save
-      redirect_to paypal_url(demarer_commande_path(@registration))
+      redirect_to paypal_url(commande_demarrer_path(@commande))
     else
       super
     end
   end
 
   def hook
-    puts params.inspect
+    # SOURCE: http://www.gotealeaf.com/blog/basic-paypal-checkout-processing-in-rails
+    params.permit!
+    status = params[:payment_status]
+    if status == "Completed" and params[:invoice] == params[:commande_id]
+      @commande = Commande.find(params[:invoice])
+      @commande.paye
+    end
     render nothing: true
   end
 
@@ -35,7 +43,7 @@ class CommandesController < ApplicationResourcesController
     end
 
     def send_mail
-      CommandeMailer.confirmation(@commande).deliver
+      # CommandeMailer.confirmation(@commande).deliver
     end
 
     def set_cors_fix
@@ -50,12 +58,13 @@ class CommandesController < ApplicationResourcesController
           business: "log210_e10_b@etsmtl.net",
           cmd: "_xclick",
           upload: 1,
-          return: "#{request.host_with_port}#{return_path}",
+          return: commande_url(@commande),
           invoice: @commande.id,
           amount: @commande.total,
           item_name: "#{@commande.restaurant.nom} | Commande [log210_e10@etsmtl.net:qwerty123]",
           item_number: @commande.numero,
-          quantity: '1'
+          quantity: '1',
+          notify_url: "#{ENV['NGROK_TUNNEL']||request.host_with_port}#{return_path}"
       }
       "https://www.sandbox.paypal.com/cgi-bin/webscr?#{values.to_query}"
     end
