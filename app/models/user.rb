@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
 
   before_create :set_default_role
 
+  def nom_complet
+    "#{nom.capitalize}, #{prenom.capitalize}"
+  end
+
   private
   def set_default_role
     self.add_role :client if self.roles.empty?

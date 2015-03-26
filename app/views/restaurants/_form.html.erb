@@ -26,7 +26,7 @@
       </fieldset>
 
       <fieldset>
-        <%= f.select :mock_restaurateur, Restaurant::RESTAURATEURS.collect {|r| [ r.capitalize, r ] }, prompt: 'Selectionner un Restaurateur', label: 'Restaurateur' %>
+        <%= f.collection_select :user_id, Restaurateur.all, :id, :nom_complet, prompt: 'Selectionner un Restaurateur', label: 'Restaurateur' %>
         <div class="actions">
           <%= link_to "Précédant", '#', class: "left button tiny secondary previous" %>
           <%= f.submit class: "button right", onclick: "confirmWithRestaurateurWarning(this); return false;" %>
@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
   function confirmWithRestaurateurWarning(elm) {
-    if (!$("#restaurant_mock_restaurateur").val()) {
+    if (!$("#restaurant_user_id").val()) {
       $('#confirmModal').foundation('reveal', 'open');
       return false;
     } else {
