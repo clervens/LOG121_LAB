@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
   has_many :livraisons
   has_many :adresses
   accepts_nested_attributes_for :adresses, :reject_if => :all_blank
+  has_many :restaurants
 
   ## Callbacks ##
 
