@@ -2,17 +2,21 @@
 #
 # Table name: restaurants
 #
-#  id                :integer          not null, primary key
-#  nom               :string(255)
-#  created_at        :datetime
-#  updated_at        :datetime
-#  mock_restaurateur :string(255)
-#  adresse           :string(255)      default("?")
+#  id         :integer          not null, primary key
+#  nom        :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  adresse    :string(255)      default("?")
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_restaurants_on_user_id  (user_id)
 #
 
 class Restaurant < ActiveRecord::Base
-	before_validation :nilify_restaurateur
-	RESTAURATEURS = %w(batman bob jack mike mobby)
+	alias_attribute :restaurateur, :user
+	# RESTAURATEURS = %w(batman bob jack mike mobby)
 
 	## Validations ##
 
@@ -20,16 +24,9 @@ class Restaurant < ActiveRecord::Base
 
 	## Associations ##
 
+	belongs_to :user
+
 	has_many :menus
 	has_many :commandes
 	has_many :livraisons, through: :commandes
-
-	def restaurateur
-		mock_restaurateur
-	end
-private
-
-	def nilify_restaurateur
-		self.mock_restaurateur = nil if mock_restaurateur.blank?
-	end
 end
