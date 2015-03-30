@@ -1,9 +1,10 @@
 <table class="table responsive">
   <thead>
     <tr>
-      <th>Nom</th>
-      <th>Prenom</th>
-      <th>Date de naissance</th>
+      <th><%= Restaurateur.human_attribute_name "nom" %></th>
+      <th><%= Restaurateur.human_attribute_name "prenom" %></th>
+      <th><%= Restaurateur.human_attribute_name "date_de_naissance" %></th>
+      <th>Restaurant(s)</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -11,9 +12,17 @@
   <tbody>
     <% @restaurateurs.each do |restaurateur| %>
       <tr>
-        <td data-th="Nom"><%= restaurateur.nom %></td>
-        <td data-th="Prenom"><%= restaurateur.prenom %></td>
-        <td data-th="Date de naissance"><%= restaurateur.date_de_naissance %></td>
+        <td data-th="<%= Restaurateur.human_attribute_name "nom" %>"><%= restaurateur.nom %></td>
+        <td data-th="<%= Restaurateur.human_attribute_name "prenom" %>"><%= restaurateur.prenom %></td>
+        <td data-th="<%= Restaurateur.human_attribute_name "date_de_naissance" %>"><%= restaurateur.date_de_naissance %></td>
+        <td data-th="Restaurant(s)">
+          <%= if restaurateur.restaurants.empty?
+                content_tag :span, "aucun", class: "label secondary tiny radius disabled", style: "color: grey;"
+              else
+                restaurateur.restaurants.pluck(:nom).join(', ')
+              end
+          %>
+        </td>
         <td>
           <ul class="button-group radius">
             <li><%= link_to 'Show', restaurateur_path(restaurateur), class: "button tiny secondary" %></li>
