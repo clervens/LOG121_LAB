@@ -17,7 +17,12 @@
 //= require underscore
 //= require _formsteps
 
-$(function(){ $(document).foundation(); });
+$(function(){
+  $(document).foundation();
+  $('.copyright').click(function(e){
+    $('#console').fadeToggle();
+  });
+});
 // _.templateSettings = {
 //     interpolate: /\{\{\=(.+?)\}\}/g,
 //     evaluate: /\{\{(.+?)\}\}/g

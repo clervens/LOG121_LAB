@@ -53,6 +53,7 @@ footer {
   border-top: 1px solid rgb(244, 244, 244);
   .copyright {
     font-size: .75em;
+    cursor: pointer;
   }
 }
 .alert-box {
@@ -66,6 +67,7 @@ input[type="number"] {
 }
 body #console {
   bottom: 40px;
+  display: none;
 }
 
 @media only screen and (max-width: 620px) {
