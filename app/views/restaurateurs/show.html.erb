@@ -1,19 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 columns">
+  <p>
+    <strong>Nom:</strong>
+    <%= @restaurateur.nom %>
+  </p>
 
-<p>
-  <strong>Nom:</strong>
-  <%= @restaurateur.nom %>
-</p>
+  <p>
+    <strong>Prenom:</strong>
+    <%= @restaurateur.prenom %>
+  </p>
 
-<p>
-  <strong>Prenom:</strong>
-  <%= @restaurateur.prenom %>
-</p>
+  <p>
+    <strong>Date de naissance:</strong>
+    <%= @restaurateur.date_de_naissance %>
+  </p>
+</div>
 
-<p>
-  <strong>Date naissance:</strong>
-  <%= @restaurateur.date_naissance %>
-</p>
-
-<%= link_to 'Edit', edit_restaurateur_path(@restaurateur), class: "button tiny secondary" %> |
-<%= link_to 'Back', restaurateurs_path, class: "button tiny secondary" %>
+<div class="small-12 columns">
+  <ul class="button-group radius">
+    <li><%= link_to 'Edit', edit_restaurateur_path(@restaurateur), class: "button tiny secondary" %></li>
+    <li><%= link_to 'Back', restaurateurs_path, class: "button tiny secondary" %></li>
+  </ul>
+</div>

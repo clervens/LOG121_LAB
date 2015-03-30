@@ -1,4 +1,4 @@
-<table class="responsive">
+<table class="table responsive">
   <thead>
     <tr>
       <th><%= Restaurant.human_attribute_name "nom" %></th>
@@ -17,7 +17,7 @@
         <td data-th="<%= Restaurant.human_attribute_name "adresse" %>"><%= truncate restaurant.adresse.humanize, length: 20 %></td>
         <td data-th="Restaurateur">
           <%= if restaurant.restaurateur
-                truncate restaurant.restaurateur.humanize, length: 20
+                truncate restaurant.restaurateur.nom_complet, length: 20
               else
                 content_tag :span, "aucun", class: "label secondary tiny radius disabled", style: "color: grey;"
               end
