@@ -5,9 +5,9 @@
     <tr>
       <th>#</th>
       <th>Restaurant</th>
-      <th>Numero de Confirmation</th>
-      <th>Date de livraison</th>
-      <th>Date de Création</th>
+      <th><%= Commande.human_attribute_name "numero" %></th>
+      <th><%= Commande.human_attribute_name "date_de_livraison" %></th>
+      <th><%= Commande.human_attribute_name "created_at" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,9 +17,9 @@
       <tr>
         <td data-th="#"><%= commande.id %></td>
         <td data-th="Restaurant"><%= link_to commande.restaurant.nom, commande.restaurant %></td>
-        <td data-th="Numero de Confirmation"><%= commande.numero %></td>
-        <td data-th="Date de livraison"><%= l commande.date_de_livraison, format: :short %></td>
-        <td data-th="Date de Création"><%= l commande.created_at, format: :short %></td>
+        <td data-th="<%= Commande.human_attribute_name "numero" %>"><%= commande.numero %></td>
+        <td data-th="<%= Commande.human_attribute_name "date_de_livraison" %>"><%= l commande.date_de_livraison, format: :short %></td>
+        <td data-th="<%= Commande.human_attribute_name "created_at" %>"><%= l commande.created_at, format: :short %></td>
         <td>
           <ul class="button-group radius">
             <li><%= link_to 'Show', commande, class: "button tiny secondary" %></li>
