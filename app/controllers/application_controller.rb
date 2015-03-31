@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 	before_action :set_locale
   before_action :authenticate_user!, unless: :format_json
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_start_time
 
 	def default_url_options(options={})
 		{ :locale => I18n.locale == I18n.default_locale ? nil : I18n.locale  }
@@ -24,7 +25,11 @@ class ApplicationController < ActionController::Base
       super
     end
   end
-	
+  
+	def set_start_time
+    @start_time = Time.now.usec
+  end
+
 private
 	def set_locale
 		I18n.locale = params[:locale] || I18n.default_locale

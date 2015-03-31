@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 	scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 	  devise_for :users
+    get '/users/commandes_a_preparer', to: 'commandes#a_preparer'
 	  root 'static_pages#home'
 	  resources :commandes do
       collection do
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
       resources :livraisons
       resources :commandes
 	  end
+    resources :restaurateurs
 	end
   ActiveAdmin.routes(self)
 end

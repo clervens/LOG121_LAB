@@ -19,6 +19,10 @@ class CommandesController < ApplicationResourcesController
     render json: {form: @form_livraison}
   end
 
+  def a_preparer
+    @commandes = CarnetDeCommande.new(nil, ids: [1, 2, 3]).commandes
+  end
+
   private
 
     def commande_params

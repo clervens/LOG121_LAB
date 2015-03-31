@@ -1,1 +1,1 @@
-json.extract! @restaurant, :id, :nom, :adresse, :created_at, :updated_at
+json.extract! @restaurant, :id, :nom, :adresse, :restaurateur, :created_at, :updated_at

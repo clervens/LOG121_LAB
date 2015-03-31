@@ -1,26 +1,23 @@
-<div class="row">
-	<div class="small-12 medium-8 columns">
-		<p>
-			<strong>Nom:</strong>
-			<%= @restaurant.nom %>
-		</p>
-		<p>
-			<strong>Adresse:</strong>
-			<%= @restaurant.adresse %>
-		</p>
-	</div>
-	<% if @restaurant.restaurateur %>
-	<div class="small-12 medium-4 columns">
-		<p>
-			<strong>Restaurateur:</strong>
-			<%= @restaurant.restaurateur.capitalize %>
-		</p>
-	</div>
-	<% end %>
+<div class="small-12 medium-8 columns">
+	<p>
+		<strong>Nom:</strong>
+		<%= @restaurant.nom %>
+	</p>
+	<p>
+		<strong>Adresse:</strong>
+		<%= @restaurant.adresse %>
+	</p>
 </div>
+<% if @restaurant.restaurateur %>
+<div class="small-12 medium-4 columns">
+	<p>
+		<strong>Restaurateur:</strong>
+		<%= @restaurant.restaurateur.nom_complet %>
+	</p>
+</div>
+<% end %>
 
-
-<div class="row">
+<div class="small-12 columns">
 	<ul class="button-group radius">
 		<li><%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "button tiny secondary" %></li>
 		<li><%= link_to 'Back', restaurants_path, class: "button tiny secondary" %></li>
