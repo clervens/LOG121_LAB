@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe CommandesController, type: :controller do
+  before do
+    sign_in FactoryGirl.create(:admin)
+  end
   describe "GET index" do
     it "assigns @commandes" do
       commande = FactoryGirl.create(:commande)

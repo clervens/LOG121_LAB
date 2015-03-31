@@ -19,6 +19,14 @@ FactoryGirl.define do
     factory :client do
       after(:create) {|user| user.add_role :client}
     end
+    factory :admin do
+      after(:create) {|user| 
+        user.add_role :entrepreneur
+        user.add_role :restaurateur
+        user.add_role :livreur
+        user.add_role :client
+      }
+    end
   end
 end
 

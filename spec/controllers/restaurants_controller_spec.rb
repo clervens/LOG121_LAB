@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe RestaurantsController, type: :controller do
+  before do
+    sign_in FactoryGirl.create(:admin)
+  end
   describe "GET index" do
     it "assigns @restaurants" do
       restaurant = FactoryGirl.create(:restaurant)

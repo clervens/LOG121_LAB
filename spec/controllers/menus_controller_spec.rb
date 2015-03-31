@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe MenusController, type: :controller do
   before do
     @restaurant = FactoryGirl.create(:restaurant_with_menus)
+    sign_in FactoryGirl.create(:admin)
   end
   describe "GET index" do
     it "assigns @menus" do
