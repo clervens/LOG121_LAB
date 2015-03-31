@@ -18,11 +18,9 @@
   <div class="row" style="margin-bottom: 50px;">
     <%= yield %>
   </div>
-  <% if Rails.env.development? %>
-    <div class="row">
-      <% console %>
-    </div>
-  <% end %>
+  <div class="row">
+    <% console %>
+  </div>
   <%= render 'layouts/footer' %>
   <%= javascript_include_tag "application" %>
 </body>
