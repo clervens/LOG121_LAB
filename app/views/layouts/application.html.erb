@@ -19,7 +19,9 @@
     <%= yield %>
   </div>
   <% if Rails.env.development? %>
-  <% console %>
+    <div class="row">
+      <% console %>
+    </div>
   <% end %>
   <%= render 'layouts/footer' %>
   <%= javascript_include_tag "application" %>

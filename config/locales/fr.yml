@@ -21,10 +21,32 @@
 
 fr:
   hello: "Hello world"
+  attributes:
+    created_at: Date de Création
+    updated_at: Màj
   activerecord:
     attributes:
       restaurant:
         nom: "Nom"
+      commande:
+        numero: Numéro
+        date_de_livraison: Date de livraison
+        etat: État
+      ligne_commande:
+        qte: Quantité
+      livraison:
+        adresse: Adresse
+      menu:
+        nom: Nom
+      plat:
+        nom: Nom
+        description: Description
+        prix: Prix
+      user:
+        nom: Nom
+        prenom: Prénom
+        telephone: Téléphone
+        date_de_naissance: Date de naissance
     errors:
       models:
         restaurant:

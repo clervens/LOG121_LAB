@@ -2,5 +2,9 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @restaurateur, class: "button tiny secondary" %>
-<%= link_to 'Back', restaurateurs_path, class: "button tiny secondary"  %>
+<div class="small-12 columns">
+  <ul class="button-group radius">
+    <li><%= link_to 'Show', @restaurateur, class: "button tiny secondary" %></li>
+    <li><%= link_to 'Back', restaurateurs_path, class: "button tiny secondary"  %></li>
+  </ul>
+</div>

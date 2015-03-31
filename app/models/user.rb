@@ -42,11 +42,29 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
+  ## Validations ##
+
   validates :nom, :prenom, presence: true, allow_blank: false
+
+  ## Associations ##
 
   has_many :commandes
   has_many :livraisons
   has_many :adresses
   accepts_nested_attributes_for :adresses, :reject_if => :all_blank
+  has_many :restaurants
+
+  ## Callbacks ##
+
+  before_create :set_default_role
+
+  def nom_complet
+    "#{nom.capitalize}, #{prenom.capitalize}"
+  end
+
+  private
+  def set_default_role
+    self.add_role :client if self.roles.empty?
+  end
 
 end

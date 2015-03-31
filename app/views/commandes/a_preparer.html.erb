@@ -1,10 +1,9 @@
-<h1>Listing commandes</h1>
-
-<table class="responsive">
+<table class="table responsive">
   <thead>
     <tr>
       <th>#</th>
       <th>Restaurant</th>
+      <th><%= Commande.human_attribute_name "etat" %></th>
       <th><%= Commande.human_attribute_name "numero" %></th>
       <th><%= Commande.human_attribute_name "date_de_livraison" %></th>
       <th><%= Commande.human_attribute_name "created_at" %></th>
@@ -17,6 +16,9 @@
       <tr>
         <td data-th="#"><%= commande.id %></td>
         <td data-th="Restaurant"><%= link_to commande.restaurant.nom, commande.restaurant %></td>
+        <td data-th="<%= Commande.human_attribute_name "etat" %>">
+          <%= content_tag :span, commande.etat.capitalize, class: "label #{CarnetDeCommande.label_class(commande.etat)} tiny radius" %>
+        </td>
         <td data-th="<%= Commande.human_attribute_name "numero" %>"><%= commande.numero %></td>
         <td data-th="<%= Commande.human_attribute_name "date_de_livraison" %>"><%= l commande.date_de_livraison, format: :short %></td>
         <td data-th="<%= Commande.human_attribute_name "created_at" %>"><%= l commande.created_at, format: :short %></td>
