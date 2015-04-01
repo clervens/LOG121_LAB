@@ -21,7 +21,7 @@
 
 class Commande < ActiveRecord::Base
   include CommandesObserver
-  enum etat: [ :demarrer, :en_preparation, :prete, :en_cours_de_livraison, :livre, :paye ]
+  enum etat: [ :demarrer, :paye, :en_preparation, :prete, :en_cours_de_livraison, :livre ]
 
   ## Validdations ##
 
