@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         get '/pretes', to: 'commandes#pretes'
         get '/get_map', to: 'commandes#get_map'
       end
+      match "/hook" => "commandes#hook", as: 'demarrer', via: :all
     end
 	  resources :restaurants do
 	  	resources :menus
