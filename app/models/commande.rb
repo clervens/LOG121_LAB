@@ -44,8 +44,7 @@ class Commande < ActiveRecord::Base
 
   ## Callbacks ##
 
-  before_create :generate_conf_number
-
+  before_create :generate_conf_number, :set_default_etat
 
   def total
     total = 0
@@ -79,6 +78,10 @@ private
 	def generate_conf_number
 		self.numero = SecureRandom.hex 10
 	end
+
+  def set_default_etat
+    self.etat = :demarrer unless self.etat
+  end
 
   def expiration_date_cannot_be_in_the_past
     if date_de_livraison.present? && date_de_livraison < 1.hour.ago
