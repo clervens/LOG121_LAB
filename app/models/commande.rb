@@ -36,7 +36,7 @@ class Commande < ActiveRecord::Base
   accepts_nested_attributes_for :ligne_commandes, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :adresse, :reject_if => lambda {|adresse| adresse.all? { |k, v| v.blank?  } }
   belongs_to :user
-  has_one :livraison
+  has_one :livraison, dependent: :destroy
 
   ## Scopes ##
 

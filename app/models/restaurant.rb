@@ -26,7 +26,7 @@ class Restaurant < ActiveRecord::Base
 
 	belongs_to :user
 
-	has_many :menus
-	has_many :commandes
+	has_many :menus, dependent: :destroy
+	has_many :commandes, dependent: :destroy
 	has_many :livraisons, through: :commandes
 end
