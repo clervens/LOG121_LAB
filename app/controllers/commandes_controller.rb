@@ -39,7 +39,7 @@ class CommandesController < ApplicationResourcesController
   end
 
   def a_preparer
-    @commandes = CarnetDeCommande.new(nil, ids: [1, 2, 3]).commandes
+    @commandes = CarnetDeCommande.new(nil, ids: current_user.restaurants.joins(:commandes).pluck('commandes.id')).commandes
   end
 
   private
