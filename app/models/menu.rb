@@ -22,7 +22,7 @@ class Menu < ActiveRecord::Base
 	## Associations ##
 
 	belongs_to :restaurant
-	has_many :plats
+	has_many :plats, dependent: :destroy
 	accepts_nested_attributes_for :plats, :reject_if => :all_blank, :allow_destroy => true
 
 	## Scopes ##
