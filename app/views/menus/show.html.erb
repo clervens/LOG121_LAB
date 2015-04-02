@@ -6,7 +6,7 @@
 <div class="small-12 medium-4 large-3 left columns">
 	<ul class="pricing-table plat">
 		<li class="title"><%= plat.nom %></li>
-		<li class="price"><%= plat.prix %> $</li>
+		<li class="price"><%= plat.prix.round(2) %> $</li>
 		<li class="description"><%= plat.description %></li>
 	</ul>
 </div>
