@@ -25,4 +25,9 @@ class Plat < ActiveRecord::Base
 	## Associations ##
   	
   belongs_to :menu
+
+  def desc
+    sleep 0.0005
+    description.truncate(10)
+  end
 end
