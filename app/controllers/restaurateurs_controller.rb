@@ -7,7 +7,7 @@ class RestaurateursController < ApplicationResourcesController
 
     create! do |success, failure|
       success.html {
-        if params[:restaurateur][:restaurants]
+        if params[:restaurateur][:restaurants].present?
           restaurant = Restaurant.find(params[:restaurateur][:restaurants])
           restaurant.restaurateur = @restaurateur
           restaurant.save
