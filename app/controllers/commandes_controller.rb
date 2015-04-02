@@ -17,8 +17,10 @@ class CommandesController < ApplicationResourcesController
     # SOURCE: http://www.gotealeaf.com/blog/basic-paypal-checkout-processing-in-rails
     params.permit!
     status = params[:payment_status]
-    if status == "Completed" and params[:invoice] == params[:commande_id]
-      @commande = Commande.find(params[:invoice][0...-1])
+    invoice_commande_id = params[:invoice][0...-1]
+    Rails.logger.info params
+    if status == "Completed" and invoice_commande_id == params[:commande_id]
+      @commande = Commande.find(invoice_commande_id)
       @commande.paye
     end
     render nothing: true
