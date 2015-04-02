@@ -1,9 +1,17 @@
 <div class="small-12 medium-6 columns">
 	<h2><%= @commande.restaurant.nom %></h2>
 	<p>
+		<span class="label <%= CarnetDeCommande.label_class(@commande.etat) %> tiny radius">
+			<%= @commande.etat %>
+		</span>
+	</p>
+	<p>
 		<strong>Numero de confirmation : </strong><%= @commande.numero %>
 		<br>
-		<strong>Date de livraison : </strong><%= @commande.date_de_livraison %>
+		<strong>Date de livraison : </strong><%= l @commande.date_de_livraison, format: :long %>
+		<br>
+		<strong>Adresse de Livraison : </strong>
+		<span style="display: inline-block;"><%= @commande.adresse.value %></span>
 	</p>
 </div>
 <div class="small-12 medium-6 columns">

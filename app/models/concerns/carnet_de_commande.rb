@@ -16,6 +16,7 @@ class CarnetDeCommande
 
   def self.label_class(etat)
     labels = {
+      Commande.etats[:demarrer] => 'warning',
       Commande.etats[:prete] => 'success',
       Commande.etats[:paye] => 'info',
       Commande.etats[:en_preparation] => 'primary'

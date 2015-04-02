@@ -29,6 +29,7 @@ gem 'twilio-ruby'
 group :production do
 	gem 'pg'
 	gem 'newrelic_rpm'
+	gem 'dalli'
 end
 
 group :development, :test do
