@@ -8,14 +8,33 @@
 		<%= @restaurant.adresse %>
 	</p>
 </div>
-<% if @restaurant.restaurateur %>
 <div class="small-12 medium-4 columns">
+	<% if @restaurant.restaurateur %>
 	<p>
 		<strong>Restaurateur:</strong>
 		<%= @restaurant.restaurateur.nom_complet %>
 	</p>
+	<% end %>
+	<p><strong>Livraisons:</strong></p>
+	<table class="table responsive">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Livreur</th>
+				<th><%= Commande.human_attribute_name "date_de_livraison" %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @restaurant.livraisons.where(:commandes => {:etat => [Commande.etats[:paye], Commande.etats[:prete]]}).joins(:commande).each do |livraison| %>
+				<tr>
+          <td data-th="<%= Commande.human_attribute_name "numero" %>"><%= link_to livraison.commande.numero, livraison.commande %></td>
+          <td data-th="Livreur"><%= livraison.user.nom_complet %></td>
+          <td data-th="<%= Commande.human_attribute_name "date_de_livraison" %>"><%= l livraison.commande.date_de_livraison, format: :short %></td>
+        </tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>
-<% end %>
 
 <div class="small-12 columns">
 	<ul class="button-group radius">

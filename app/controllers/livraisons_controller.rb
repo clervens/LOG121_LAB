@@ -9,6 +9,16 @@ class LivraisonsController < ApplicationResourcesController
     end
   end
 
+  def livrer
+    @livraison = Livraison.find params[:id]
+    @livraison.commande.livrer
+    redirect_to @livraison.commande
+  end
+
+  def user_livraisons
+    @livraisons = current_user.livraisons.where.not(:commandes => {:etat => Commande.etats[:livre]}).joins :commande
+  end
+
   private
 
     def livraison_params
