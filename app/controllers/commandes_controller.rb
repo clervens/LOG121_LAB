@@ -18,7 +18,7 @@ class CommandesController < ApplicationResourcesController
     params.permit!
     status = params[:payment_status]
     if status == "Completed" and params[:invoice] == params[:commande_id]
-      @commande = Commande.find(params[:invoice])
+      @commande = Commande.find(params[:invoice][0...-1]])
       @commande.paye
     end
     render nothing: true
@@ -63,7 +63,7 @@ class CommandesController < ApplicationResourcesController
           cmd: "_xclick",
           upload: 1,
           return: commande_url(@commande),
-          invoice: @commande.id,
+          invoice: "#{@commande.id}#{Rails.env[0]}",
           amount: @commande.total,
           item_name: "#{@commande.restaurant.nom} | Commande [log210_e10@etsmtl.net:qwerty123]",
           item_number: @commande.numero,
