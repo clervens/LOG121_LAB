@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 	scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 	  devise_for :users
     get '/users/commandes_a_preparer', to: 'commandes#a_preparer'
+    get '/users/livraisons', to: 'livraisons#user_livraisons', as: 'user_livraisons'
+    get '/users/livraisons/:id/livrer', to: 'livraisons#livrer', as: 'livrer'
 	  root 'static_pages#home'
     get '/stats', to: 'static_pages#stats'
 	  resources :commandes do

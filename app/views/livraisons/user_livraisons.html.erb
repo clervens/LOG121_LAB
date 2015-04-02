@@ -1,0 +1,33 @@
+<div class="small-12 columns">
+  <% if @livraisons.empty? %>
+    <h2>Aucune Livraison</h2>    
+  <% else %>
+  <table class="table responsive">
+    <thead>
+      <tr>
+        <th><%= Commande.human_attribute_name "numero" %></th>
+        <th><%= Commande.human_attribute_name "adresse" %></th>
+        <th><%= Restaurant.human_attribute_name "updated_at" %></th>
+        <th><%= Restaurant.human_attribute_name "created_at" %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @livraisons.each do |livraison| %>
+        <tr>
+          <td data-th="<%= Commande.human_attribute_name "numero" %>"><%= link_to livraison.commande.numero, livraison.commande %></td>
+          <td data-th="<%= Commande.human_attribute_name "adresse" %>"><%= livraison.commande.adresse.value %></td>
+          <td data-th="<%= Restaurant.human_attribute_name "updated_at" %>"><%= l livraison.updated_at, format: :short %></td>
+          <td data-th="<%= Restaurant.human_attribute_name "created_at" %>"><%= l livraison.created_at, format: :short %></td>
+          <td>  
+            <ul class="button-group radius">
+              <li><%= link_to 'Livrer', livrer_path(livraison), class: "button tiny secondary" %></li>
+              <li><%= link_to 'X', [livraison.commande.restaurant, livraison], method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %></li>
+            </ul>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>
