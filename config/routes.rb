@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	  devise_for :users
     get '/users/commandes_a_preparer', to: 'commandes#a_preparer'
 	  root 'static_pages#home'
+    get '/stats', to: 'static_pages#stats'
 	  resources :commandes do
       collection do
         get '/pretes', to: 'commandes#pretes'
