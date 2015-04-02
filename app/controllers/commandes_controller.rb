@@ -18,7 +18,7 @@ class CommandesController < ApplicationResourcesController
     params.permit!
     status = params[:payment_status]
     if status == "Completed" and params[:invoice] == params[:commande_id]
-      @commande = Commande.find(params[:invoice][0...-1]])
+      @commande = Commande.find(params[:invoice][0...-1])
       @commande.paye
     end
     render nothing: true
