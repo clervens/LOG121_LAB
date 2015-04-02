@@ -101,6 +101,7 @@
       $('#current_menu').empty();
       $('#current_menu').append(menus_template({menus: data}));
       $(document).foundation('equalizer', 'reflow');
+      formstep.reset_form_height();
     })
   }
   function summary() {
