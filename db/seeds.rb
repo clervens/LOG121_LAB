@@ -46,7 +46,8 @@ Restaurant.create!([{
   nom: "Bouillon Bilk",
   adresse: "1595 Boul Saint-Laurent, Montréal, Québec H2X 2S9, Canada"
 }, {
-  nom: "Evy ting Wong![TEST]",
+  id: 100,
+  nom: "Evy ting Wong! [TEST]",
   adresse: "8335 Boul Langelier, Montréal, QC H1P 2B8"
 }])
 
@@ -100,13 +101,14 @@ et vieux cheddar. Émulsion de moutarde",
     }],
 }])
 
-menu = { nom: "BIG @$$ Menu", restaurant_id: 4, plats_attributes: [] }
-5000.times do |index|
+menu = { nom: "BIG @$$ Menu", restaurant_id: 100, plats_attributes: [] }
+10000.times do |index|
   nom = ('a'..'z').to_a.sample(10).join
   description = ('a'..'z').to_a.sample(30).join
   prix = (rand(100)+rand).round 2
   menu[:plats_attributes] << { nom: nom, description: description, prix: prix }
 end
+Menu.create! menu
 
 ## Adresses
 
