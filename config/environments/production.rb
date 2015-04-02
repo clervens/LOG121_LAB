@@ -10,8 +10,16 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
-  config.cache_store = :dalli_store, nil, { :namespace => "LOG210_EQUIPE10", :expires_in => 1.day, :compress => true }
-
+  config.cache_store = :dalli_store, (ENV["MEMCACHIER_SERVERS"] || "").split(","), {
+    :username => ENV["MEMCACHIER_USERNAME"],
+    :password => ENV["MEMCACHIER_PASSWORD"],
+    :failover => true,
+    :socket_timeout => 1.5,
+    :socket_failure_delay => 0.2,
+    :expires_in => 1.day,
+    :compress => true
+  }
+  
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
